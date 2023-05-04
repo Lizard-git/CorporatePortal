@@ -1,0 +1,156 @@
+<!--
+=========================================================
+* Soft UI Dashboard - v1.0.7
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/portal/img/apple-icon.png}">
+  <link rel="icon" type="image/png" th:href="@{/portal/img/favicon.png}">
+  <title>Авторизация</title>
+  <!--     Fonts and icons     -->
+  <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />-->
+  <!-- Nucleo Icons -->
+  <link th:href="@{/portal/css/nucleo-icons.css}" rel="stylesheet" />
+  <link th:href="@{/portal/css/nucleo-svg.css}" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <!--  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>-->
+  <!--  <link th:href="@{/css/nucleo-svg.css}" href="/resources/static/css/" rel="stylesheet" />-->
+  <!-- CSS Files -->
+  <link th:href="@{/portal/css/soft-ui-dashboard.css}" id="pagestyle" rel="stylesheet" />
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+  <aside th:replace="~{/portal/fragments/sidebar-fragment.html::sidebar('/')}"></aside>
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <nav th:replace="~{/portal/fragments/header-fragment.html::header('Профиль пользователя')}"></nav>
+    <div class="container-fluid">
+      <div class="page-header min-height-300 border-radius-xl" style="background-image: url('/portal/img/curved-images/123.jpg'); background-position-y: 50%;">
+        <span class="mask bg-gradient-primary opacity-5"></span>
+      </div>
+      <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
+        <div class="row gx-4">
+          <div class="col-auto">
+            <div class="avatar avatar-xl position-relative">
+              <img src="/portal/fonts/icons2/user-profile.svg" alt="profile_image" class=" w-100 h-100 border-radius-lg shadow-sm">
+            </div>
+          </div>
+          <div class="col-auto my-auto">
+            <div class="h-100">
+              <h5 class="mb-1" th:text="${User.getData().getSurname() + ' ' + User.getData().getName() + ' ' + User.getData().getMiddleName()}">
+                Фамилия Имя Отчество
+              </h5>
+              <p class="mb-0 font-weight-bold text-sm">
+                <span th:text="${User.getData().getDepartments().getName()}">Отдел рпоарл аор лаор лаопрлралопрлоарлоарлоар лаопролрлаорлоар паолрплаорлаорлоар алопрлоар оларлоа рлаоро</span> / <span th:text="${User.getData().getPosition().getName()}">Должность</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12 col-xl-6">
+          <div id="widthRowCard" class="row">
+            <div class="col-12 mb-2">
+              <div class="card">
+                <div class="card-header pt-3 pb-0 pe-2">
+                    <h5 class="text-muted">Личные данные</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-group">
+                              <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Адрес:</strong> &nbsp;
+                                <span th:if="${User.getData().getIdAddress().getFrame() != null}" th:text="${User.getData().getIdAddress().getCity() + ' ' + User.getData().getIdAddress().getStreet() + ' ' + User.getData().getIdAddress().getHouse() + ' ' + User.getData().getIdAddress().getFrame()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
+                                <span th:if="${User.getData().getIdAddress().getFrame() == null}" th:text="${User.getData().getIdAddress().getCity() + ' ' + User.getData().getIdAddress().getStreet() + ' ' + User.getData().getIdAddress().getHouse()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
+                              </li>
+                              <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Городской номер:</strong> &nbsp; <nobr th:text="${User.getData().getPhone()}">+7 (7898) 34 - 45 - 45</nobr></li>
+                              <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Сотовый:</strong> &nbsp; <nobr th:text="${User.getData().getMobilePhone()}">+7 (914) 999-99-99</nobr></li>
+                              <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">IP телефон:</strong> &nbsp; <nobr th:text="${User.getData().getIpPhone()}">1613</nobr></li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="list-group">
+                              <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Рабочая почта:</strong> &nbsp; <nobr th:text="${User.getData().getWorkEmail()}">User@arm.gs.gov</nobr></li>
+                              <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Домашняя почта:</strong> &nbsp; <nobr th:text="${User.getData().getHomeEmail()}">user@mail.com</nobr></li>
+                              <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Стаж:</strong> &nbsp; <nobr>3 года</nobr></li>
+                              <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Номер кабинета:</strong> &nbsp; <nobr th:text="${User.getData().getCabinetNumber()}">5</nobr></li>
+                              <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">IP адрес компьютера:</strong> &nbsp; <nobr th:text="${User.getData().getIpAddressPC()}">10.85.5.4</nobr></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mt-2">
+              <div class="card max-height-500">
+                <div class="card-header">
+                    <h5 class="text-muted">C вами в отделе</h5>
+                </div>
+                <div class="card-body overflow-auto">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-xl-6">
+          <div id="setHeight" class="card">
+            <div class="card-header">
+              <h5 class="text-muted">Ваши приложения</h5>
+            </div>
+            <div class="card-body overflow-auto">
+
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid py-4">
+      <footer class="footer pt-3  ">
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+              <div class="copyright text-center text-sm text-muted text-lg-start">
+                © Alex Orl
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+  <!--   Core JS Files   -->
+  <script src="/portal/js/core/popper.min.js"></script>
+  <script src="/portal/js/core/bootstrap.min.js"></script>
+  <script src="/portal/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="/portal/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="/portal/js/plugins/chartjs.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <script src="/portal/js/soft-ui-dashboard.js"></script>
+  <script src="/portal/js/script.js"></script>
+</body>
+
+</html>

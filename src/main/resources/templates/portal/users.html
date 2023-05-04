@@ -1,0 +1,202 @@
+<!--
+=========================================================
+* Soft UI Dashboard - v1.0.7
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/portal/img/apple-icon.png}">
+  <link rel="icon" type="image/png" th:href="@{/portal/img/favicon.png}">
+  <title>Авторизация</title>
+  <!--     Fonts and icons     -->
+  <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />-->
+  <!-- Nucleo Icons -->
+  <link th:href="@{/portal/css/nucleo-icons.css}" rel="stylesheet" />
+  <link th:href="@{/portal/css/nucleo-svg.css}" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <!--  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>-->
+  <!--  <link th:href="@{/css/nucleo-svg.css}" href="/resources/static/css/" rel="stylesheet" />-->
+  <!-- CSS Files -->
+  <link th:href="@{/portal/css/soft-ui-dashboard.css}" id="pagestyle" rel="stylesheet" />
+  <link th:href="@{/portal/js/plugins/DataTables/DataTables-1.13.4/css/jquery.dataTables.min.css}" rel="stylesheet"/>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+<aside th:replace="~{/portal/fragments/sidebar-fragment.html::sidebar('/users')}"></aside>
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+  <nav th:replace="~{/portal/fragments/header-fragment.html::header('Профиль пользователя')}"></nav>
+  <div class="container-fluid">
+
+  </div>
+  <div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+<!--        <div class="card-header">-->
+<!--          <div class="row">-->
+
+<!--            <div class="col-12 col-xl-2">-->
+<!--              <div class="input-group">-->
+<!--                <select class="form-control">-->
+<!--                  <option value="" disabled selected>Адрес</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-12 col-xl-2">-->
+<!--              <div class="input-group">-->
+<!--                <select class="form-control" >-->
+<!--                  <option value="" disabled selected>Отдел</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-12 col-xl-2">-->
+<!--              <div class="input-group">-->
+<!--                <input type="text" id="inputFIO" class="form-control" placeholder="ФИО пользователя" aria-describedby="inputFIO">-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-12 col-xl-2">-->
+<!--              <div class="input-group">-->
+<!--                <input type="text" id="phone" class="form-control" placeholder="Телефон" aria-describedby="inputFIO">-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-12 col-xl-2">-->
+<!--              <div class="input-group">-->
+<!--                <select class="form-control" >-->
+<!--                  <option value="" disabled selected>Должность</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                  <option>A</option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-12 col-xl-2">-->
+<!--              <div class="input-group">-->
+<!--                <button type="button" class="btn bg-gradient-castom-ui m-0 w-100 p-2">Найти</button> &lt;!&ndash;add js function&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="row">-->
+<!--            <div class="col-12">-->
+<!--              <div class="input-group mt-3">-->
+<!--                <button type="button" class="btn btn-light m-0 w-100">Отчистить</button> &lt;!&ndash;add js function&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--        </div>-->
+        <div class="card-body ">
+          <div class="table-responsive p-0">
+            <table id="table1" class="table table-striped align-items-center mb-0" data-sticky-header="true" data-sticky-header-offset-y="60">
+              <thead>
+              <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ФИО</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Отдел</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Должность</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">IP телефон</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Телефон</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Кабинет</th>
+                <th class="text-warning text-uppercase text-xxs font-weight-bolder opacity-7">Измение</th>
+                <th class="text-danger text-uppercase text-xxs font-weight-bolder opacity-7">Удаление</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr th:each="user:${AllUsers}" th:data-slug="${user.getId()}">
+                  <td th:text="${user.getData().getSurname() + ' ' + user.getData().getName() + ' ' + user.getData().getMiddleName()}">1</td>
+                  <td th:text="${user.getData().getDepartments().getName()}">1</td>
+                  <td th:text="${user.getData().getPosition().getName()}">1</td>
+                  <td th:text="${user.getData().getIpPhone()}">1</td>
+                  <td th:text="${user.getData().getPhone()}">1</td>
+                  <td th:text="${user.getData().getCabinetNumber()}">1</td>
+                  <td>1</td>
+                  <td>1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="container-fluid py-4">
+    <footer class="footer pt-3  ">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="copyright text-center text-sm text-muted text-lg-start">
+              © Alex Orl
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</main>
+<!--   Core JS Files   -->
+<script src="/portal/js/core/popper.min.js"></script>
+<script src="/portal/js/core/bootstrap.min.js"></script>
+<script src="/portal/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/portal/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/portal/js/plugins/chartjs.min.js"></script>
+<script src="/portal/js/plugins/jquery.js"></script>
+<!--<script src="/portal/js/plugins/DataTables/datatables.min.js"></script>-->
+<script src="/portal/js/plugins/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script>
+<script>
+  var win = navigator.platform.indexOf('Win') > -1;
+  if (win && document.querySelector('#sidenav-scrollbar')) {
+    var options = {
+      damping: '0.5'
+    }
+    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+  }
+
+  $(document).ready(function () {
+    $('#table1').DataTable({
+      "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        var slug = $(nRow).data("slug");
+        $(nRow).attr("href", "/invoices/" + slug);
+        $(nRow).css( 'cursor', 'pointer' );
+        $(nRow).click(function(){
+          window.location = $(this).attr('href');
+          return false;
+        });
+      }
+    });
+  })
+</script>
+<script src="/portal/js/soft-ui-dashboard.js"></script>
+
+</body>
+
+</html>

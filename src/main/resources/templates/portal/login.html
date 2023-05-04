@@ -1,0 +1,186 @@
+<!--
+=========================================================
+* Soft UI Dashboard - v1.0.7
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/portal/img/apple-icon.png}">
+  <link rel="icon" type="image/png" th:href="@{/portal/img/favicon.png}">
+  <title>Авторизация</title>
+  <!--     Fonts and icons     -->
+  <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />-->
+  <!-- Nucleo Icons -->
+  <link th:href="@{/portal/css/nucleo-icons.css}" rel="stylesheet" />
+  <link th:href="@{/portal/css/nucleo-svg.css}" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <!--  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>-->
+  <!--  <link th:href="@{/css/nucleo-svg.css}" href="/resources/static/css/" rel="stylesheet" />-->
+  <!-- CSS Files -->
+  <link th:href="@{/portal/css/soft-ui-dashboard.css}" id="pagestyle" rel="stylesheet" />
+</head>
+
+<body class="">
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+          <div class="container-fluid pe-0">
+            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="#"> <!--Вставить ссылку-->
+              <!--Вставить иконку СФР-->
+              Внутренний портал СФР
+            </a>
+            <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon mt-2">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navigation">
+              <ul class="navbar-nav mx-auto ms-xl-auto me-xl-7">
+                <li class="nav-item">
+                  <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="/news">
+                    Новости
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-2" href="/holidays">
+                    Праздники
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-2" href="/links">
+                    Cсылки
+                  </a>
+                </li>
+              </ul>
+              <li class="nav-item d-flex align-items-center">
+                <a class="btn btn-round btn-sm mb-0 bg-gradient-dark me-2" target="_blank" href="/get/file/instruction/">Инструкция</a>
+              </li>
+            </div>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+      </div>
+    </div>
+  </div>
+  <main class="main-content  mt-0">
+    <section>
+      <div class="page-header min-vh-75">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
+              <div class="card card-plain mt-8" style="z-index: 1000;">
+                <div class="card-header pb-0 text-left bg-transparent">
+                  <h3 class="font-weight-bolder text-info text-gradient">С возвращением !</h3>
+                  <p class="mb-0">Введите ваш логи и пароль от системы</p>
+                </div>
+                <div class="card-body">
+                  <form method="post" role="form">
+                    <label>Логин</label>
+                    <div class="mb-3">
+                      <input id="username"
+                             type="text"
+                             class="form-control"
+                             placeholder="OrlovAE"
+                             aria-label="Login"
+                             aria-describedby="email-addon"
+                             name="username">
+                    </div>
+                    <label>Пароль</label>
+                    <div class="mb-3">
+                      <input id="password"
+                             type="password"
+                             class="form-control"
+                             placeholder="Password"
+                             aria-label="Password"
+                             aria-describedby="password-addon"
+                             name="password">
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" id="login" class="btn bg-gradient-info w-100 mt-4 mb-0">Вход</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                  <p class="text-danger" th:if="${error}">Не верный логин или пароль</p>
+                  <p class="text-success" th:if="${logout}">Вы вышли из программы</p>
+                  <p class="mb-4 text-sm mx-auto">
+                    У вас нет логина и пароля ?
+                    <a href="/get/file/instruction/" class="text-info text-gradient font-weight-bold">Инструкция по получению</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
+                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('/portal/img/curved-images/curved22.jpg')"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+  <footer class="footer py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mb-4 mx-auto text-center">
+          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+            Новости отделения
+          </a>
+          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+            Праздники
+          </a>
+          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+            Полезные ссылки
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8 mx-auto text-center mt-1">
+          <p class="mb-0 text-secondary">
+            Programmer © Orlov Alexandr
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+  <!--   Core JS Files   -->
+  <!--   Core JS Files   -->
+  <script src="/portal/js/core/popper.min.js"></script>
+  <script src="/portal/js/core/bootstrap.min.js"></script>
+  <script src="/portal/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="/portal/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="/portal/js/plugins/chartjs.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <script src="/portal/js/soft-ui-dashboard.js"></script>
+  <script src="/portal/js/login-script.js"></script>
+</body>
+
+</html>
