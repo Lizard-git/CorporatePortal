@@ -1,17 +1,26 @@
 package sfr.application.corporateportal.portal.service;
 
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import sfr.application.corporateportal.portal.dto.input_entity_dto.SearchUsersDTO;
-import sfr.application.corporateportal.portal.entity.AddressEntity;
-import sfr.application.corporateportal.portal.entity.DepartmentsEntity;
-import sfr.application.corporateportal.portal.entity.PositionEntity;
-import sfr.application.corporateportal.portal.entity.UsersEntity;
+import sfr.application.corporateportal.portal.entity.*;
+import sfr.application.corporateportal.portal.repository.DataUserRepository;
+import sfr.application.corporateportal.portal.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UsersService {
+    private final UserRepository userRepository;
+    private final DataUserRepository dataUserRepository;
+    public Page<DataUsersEntity> getAllByDepartment(DepartmentsEntity department, Pageable pageable) {
+        return dataUserRepository.getAllByDepartments(department, pageable);
+    }
+
     public void delete(UsersEntity user, UsersEntity userAction) {
 
     }

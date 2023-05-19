@@ -43,8 +43,8 @@ public class RolesEntity {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "Roles_Authority",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_1_USER_ROLE"))},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_1_ROLE_USER"))},
+            joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_1_ROLE_USER"))},
+            inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_1_AUTHORITY_ROLE"))},
             schema = "dashboard"
     )
     private List<AuthorityEntity> authority;

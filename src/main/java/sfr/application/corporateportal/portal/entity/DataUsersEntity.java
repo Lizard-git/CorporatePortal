@@ -89,4 +89,7 @@ public class DataUsersEntity {
     @ManyToOne
     @JoinColumn(name = "position")
     private PositionEntity position;
+
+    @OneToOne
+    private UsersEntity user;
 }

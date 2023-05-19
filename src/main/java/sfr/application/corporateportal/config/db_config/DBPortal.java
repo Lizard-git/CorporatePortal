@@ -1,8 +1,6 @@
 package sfr.application.corporateportal.config.db_config;
 
 import jakarta.persistence.ValidationMode;
-import org.hibernate.boot.SchemaAutoTooling;
-import org.hibernate.cfg.AvailableSettings;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -85,7 +83,6 @@ public class DBPortal {
         em.setPersistenceUnitName(ENTITY_MANAGER_FACTORY);
         em.setPackagesToScan(ENTITY_PACKAGE);
         em.setJpaVendorAdapter(a);
-
         em.setValidationMode(ValidationMode.CALLBACK);
         final HashMap<String, Object> properties = new HashMap<>();
         //properties.put("jakarta.persistence.validation.mode", "CALLBACK");

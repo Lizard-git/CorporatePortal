@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<nav th:fragment="pagination(Object, Url)" aria-label="Page navigation example">
+    <ul th:if="${Object.totalPages > 0}" class="pagination pagination-sm">
+        <!--Переписать !!!!!!!!-->
+        <li th:if="${Object.number != 0}" class="page-item">
+            <a th:href="@{ ${Url} + '0'}" class="page-link">0</a>
+        </li>
+        <li th:if="${(Object.number - 1) > 0}" class="page-item">
+            <a th:href="@{ ${Url} + ${Object.number - 1}}" th:text="${Object.number - 1}" class="page-link"></a>
+        </li>
+        <li class="page-item active">
+            <a th:href="@{ ${Url} +  ${Object.number}}" th:text="${Object.number}" class="page-link"></a>
+        </li>
+        <li th:if="${(Object.number + 1) < Object.totalPages - 1}" class="page-item">
+            <a th:href="@{ ${Url} + ${Object.number + 1}}" th:text="${Object.number + 1}" class="page-link"></a>
+        </li>
+        <li th:if="${Object.number != Object.totalPages - 1 && Object.number != Object.totalPages}">
+            ...
+        </li>
+        <li th:if="${Object.number != Object.totalPages - 1}" class="page-item">
+            <a th:href="@{ ${Url} +  ${Object.totalPages - 1}}" th:text="${Object.totalPages - 1}"
+               class="page-link"></a>
+        </li>
+        <!--Переписать !!!!!!!! end-->
+    </ul>
+</nav>
+<nav th:fragment="pagination_search(Object, Url, Url2)" aria-label="Page navigation example">
+    <ul th:if="${Object.totalPages > 0}" class="pagination pagination-sm">
+        <!--Переписать !!!!!!!!-->
+        <li th:if="${Object.number != 0}" class="page-item">
+            <a th:href="@{ ${Url} + '0' + ${Url2}}" class="page-link">0</a>
+        </li>
+        <li th:if="${(Object.number - 1) > 0}" class="page-item">
+            <a th:href="@{ ${Url} + ${Object.number - 1}  + ${Url2}}" th:text="${Object.number - 1}"
+               class="page-link"></a>
+        </li>
+        <li class="page-item active">
+            <a th:href="@{ ${Url} +  ${Object.number}  + ${Url2}}" th:text="${Object.number}" class="page-link"></a>
+        </li>
+        <li th:if="${(Object.number + 1) < Object.totalPages - 1}" class="page-item">
+            <a th:href="@{ ${Url} + ${Object.number + 1}  + ${Url2}}" th:text="${Object.number + 1}"
+               class="page-link"></a>
+        </li>
+        <li th:if="${Object.number != Object.totalPages - 1 && Object.number != Object.totalPages}">
+            ...
+        </li>
+        <li th:if="${Object.number != Object.totalPages - 1}" class="page-item">
+            <a th:href="@{ ${Url} +  ${Object.totalPages - 1}  + ${Url2}}" th:text="${Object.totalPages - 1}"
+               class="page-link"></a>
+        </li>
+        <!--Переписать !!!!!!!! end-->
+    </ul>
+</nav>
+</body>
+</html>

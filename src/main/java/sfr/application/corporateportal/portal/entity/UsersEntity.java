@@ -78,6 +78,9 @@ public class UsersEntity {
     @OneToMany(mappedBy = "user")
     private List<ChatUsersEntity> chatsUsers;
 
+    @OneToMany(mappedBy = "userAdd")
+    private List<FilesEntity> files;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Users_Roles",
