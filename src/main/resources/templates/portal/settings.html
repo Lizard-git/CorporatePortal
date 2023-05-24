@@ -20,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/portal/img/apple-icon.png}">
     <link rel="icon" type="image/png" th:href="@{/portal/img/favicon.png}">
-    <title>Авторизация</title>
+    <title>Настройки</title>
     <!--     Fonts and icons     -->
     <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />-->
     <!-- Nucleo Icons -->
@@ -37,12 +37,318 @@
 <aside th:replace="~{/portal/fragments/sidebar-fragment.html::sidebar('/settings')}"></aside>
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <nav th:replace="~{/portal/fragments/header-fragment.html::header('Профиль пользователя')}"></nav>
+    <nav th:replace="~{/portal/fragments/header-fragment.html::header('Настройки')}"></nav>
     <div class="container-fluid">
 
     </div>
     <div class="container-fluid py-4">
-        settings
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="tab" id="profile-tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Профиль</button>
+            </li>
+            <!-- Смена пароля, логина -->
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" id="security-tab" data-bs-target="#security-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Безопастность</button>
+            </li>
+            <!-- Страница безопасника -->
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" id="user-security-tab" data-bs-target="#user-security-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Сотруднику безопастности</button>
+            </li>
+            <!-- Администратору -->
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" id="administrator-tab" data-bs-target="#administrator-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Администратору</button>
+            </li>
+            <!-- На этой странице обычный пользователь сможет предложить новость или праздник -->
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" id="inform-tab" data-bs-target="#inform-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false">Информирование</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <div class="row">
+                    <div class="col">
+                        <div class="card mt-3 mb-3">
+                            <div class="card-header"><h6 class="mb-0 pb-0">Данные пользователя</h6></div>
+                            <div class="card-body mt-0 pt-0">
+                                <form method="post" th:action="@{/users/new}" th:object="${DataUser}">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="surname-input">Фамилия</label>
+                                                <input type="text" class="form-control" id="surname-input" placeholder="Фамилия" th:field="*{surname}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Ошибка</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name-input">Имя</label>
+                                                <input type="text" class="form-control" id="name-input" placeholder="Имя" th:field="*{name}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="middle-name-input">Отчество</label>
+                                                <input type="text" class="form-control" id="middle-name-input" placeholder="Отчество" th:field="*{middleName}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">Ошибка</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="date-birthday">Дата рождения</label>
+                                                <input type="date" class="form-control" id="date-birthday" th:field="*{dateBirthday}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('dateBirthday')}" th:errors="*{dateBirthday}">Ошибка</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="mobile-phone">Мобильный телефон</label>
+                                                <input type="text" class="form-control" id="mobile-phone" placeholder="+* (***) ***-**-**" th:field="*{mobilePhone}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('mobilePhone')}" th:errors="*{mobilePhone}">Ошибка</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="ip-phone">IP Телефон</label>
+                                                <input type="text" class="form-control" id="ip-phone" placeholder="****" th:field="*{ipPhone}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('ipPhone')}" th:errors="*{ipPhone}">Ошибка</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ipPhone">Городской номер</label>
+                                                <input type="text" class="form-control" id="ipPhone" placeholder="**-**-**" th:field="*{phone}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Ошибка</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="home-email">Email (личный)</label>
+                                                <input type="text" class="form-control" id="home-email" placeholder="test@gmail.com" th:field="*{homeEmail}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('homeEmail')}" th:errors="*{homeEmail}">Ошибка</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="work-email">Email (рабочий)</label>
+                                                <input type="text" class="form-control" id="work-email" placeholder="test@75.sfr.gov.ru" th:field="*{workEmail}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('workEmail')}" th:errors="*{workEmail}">Ошибка</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ip-address-pc-input">IP Адрес компьютера</label>
+                                                <input type="text" class="form-control" id="ip-address-pc-input" placeholder="***" th:field="*{ipAddressPC}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('ipAddressPC')}" th:errors="*{ipAddressPC}">Ошибка</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="address-input">Адрес</label>
+                                                    <select class="form-select" id="address-input" th:field="*{address}">
+                                                        <option th:each="address: ${AllAddress}" th:value="${address.getId()}" th:text="${address.getCity() + ' ' + address.getStreet() + ' ' + address.getHouse()}"></option>
+                                                    </select>
+<!--                                                <input list="address-list" class="form-control" id="address-input" name="address" placeholder="г.Чита ул.Чкалова 160Б" th:field="*{address}">-->
+<!--                                                <datalist id="address-list">-->
+<!--                                                    <option th:each="address: ${AllAddress}" th:value="${address.getId()}" th:text="${address.getCity() + '' + address.getStreet() + '' + address.getHouse()}"></option>-->
+<!--                                                </datalist>-->
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="department-input">Отдел</label>
+                                                <select class="form-select" id="department-input" th:field="*{departments}">
+                                                    <option th:each="department : ${AllDepartments}" th:value="${department.getId()}" th:text="${department.getName()}" th:title="${department.getDescription()}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="position-input">Должность</label>
+                                                <select class="form-select" id="position-input" th:field="*{position}">
+                                                    <option th:each="position : ${AllPosition}" th:value="${position.getId()}" th:text="${position.getName()}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cabinet-number-input">Номер кабинета</label>
+                                                <input type="text" class="form-control" id="cabinet-number-input" placeholder="***" th:field="*{cabinetNumber}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('cabinetNumber')}" th:errors="*{cabinetNumber}">Ошибка</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-success float-end">Изменить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="security-tab-pane" role="tabpanel" aria-labelledby="security-tab" tabindex="0">
+                <div class="row">
+                    <div class="col">
+                        <div class="card mt-3 mb-3">
+                            <div class="card-header">
+                                <h6 class="mb-0 pb-0">Авторизационные данные пользователя</h6>
+                                <div class="alert alert-info text-white" role="alert">
+                                    <p>Если вы хотите изменить только свой логин, то оставьте пустыми поля: "Старый пароль", "Новый пароль", "Повторите новый пароль".</p>
+                                    <p>Если вы хотите изменить пароль, помниете о следующих правилах:</p>
+                                    <ul>
+                                        <li>Пароль должен быть более 6 символов</li>
+                                        <li>Пароль должен содержать цифры, прописные и строчные буквы</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body mt-0 pt-0">
+                                <form method="post" th:action="@{/users/new}" th:object="${User}">
+                                    <div class="form-group">
+                                        <label for="login-input">Логин</label>
+                                        <input type="text" class="form-control" id="login-input" placeholder="OrlovAE" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" th:field="*{login}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="old-password">Старый пароль</label>
+                                        <input type="password" class="form-control" id="old-password" placeholder="******" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-password">Новый пароль</label>
+                                        <input type="password" class="form-control" id="new-password" placeholder="******" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="test-new-password">Повторите новый пароль</label>
+                                        <input type="password" class="form-control" placeholder="******" id="test-new-password" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')">
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-success float-end">Изменить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="user-security-tab-pane" role="tabpanel" aria-labelledby="user-security-tab" tabindex="0">
+                <div class="row">
+                    <div class="col">
+                        <div class="card mt-3 mb-3">
+                            <div class="card-header">
+                                <h6 class="mb-0 pb-0">Создание нового пользователя</h6>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" th:action="@{/users/new}" th:object="${NewUser}">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-login-input" class="marker-important">Логин</label>
+                                                <input type="text" class="form-control" id="new-login-input" placeholder="OrlovAE" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" th:field="*{login}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Ошибка</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-password-input" class="marker-important">Пароль</label>
+                                                <input type="password" class="form-control" id="new-password-input" placeholder="******" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" th:field="*{password}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Ошибка</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-role-input">Роль</label>
+                                                <select class="form-select" id="new-role-input" th:field="*{role}">
+                                                    <option th:each="role: ${AllRoles}" th:value="${role.getId()}" th:text="${role.getShortName()}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-surname-input" class="marker-important">Фамилия</label>
+                                                <input type="text" class="form-control" id="new-surname-input" placeholder="Фамилия" th:field="*{surname}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Ошибка</small>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-name-input" class="marker-important">Имя</label>
+                                                <input type="text" class="form-control" id="new-name-input" placeholder="Имя" th:field="*{name}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка</small>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-middle-name-input" class="marker-important">Отчество</label>
+                                                <input type="text" class="form-control" id="new-middle-name-input" placeholder="Отчество" th:field="*{middleName}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">Ошибка</small>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-home-email">Email (личный)</label>
+                                                <input type="text" class="form-control" id="new-home-email" placeholder="test@gmail.com" th:field="*{homeEmail}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('homeEmail')}" th:errors="*{homeEmail}">Ошибка</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-mobile-phone">Мобильный телефон</label>
+                                                <input type="text" class="form-control" id="new-mobile-phone" placeholder="+* (***) ***-**-**" th:field="*{mobilePhone}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('mobilePhone')}" th:errors="*{mobilePhone}">Ошибка</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-date-birthday" class="marker-important">Дата рождения</label>
+                                                <input type="date" class="form-control" id="new-date-birthday" th:field="*{dateBirthday}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('dateBirthday')}" th:errors="*{dateBirthday}">Ошибка</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-work-email">Email (рабочий)</label>
+                                                <input type="text" class="form-control" id="new-work-email" placeholder="test@75.sfr.gov.ru" th:field="*{workEmail}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('workEmail')}" th:errors="*{workEmail}">Ошибка</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="new-ip-address-pc-input">IP Адрес компьютера</label>
+                                                <input type="text" class="form-control" id="new-ip-address-pc-input" placeholder="***" th:field="*{ipAddressPC}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('ipAddressPC')}" th:errors="*{ipAddressPC}">Ошибка</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="new-department-input" class="marker-important">Отдел</label>
+                                                <select class="form-select" id="new-department-input" th:field="*{department}">
+                                                    <option th:each="department : ${AllDepartments}" th:value="${department.getId()}" th:text="${department.getName()}" th:title="${department.getDescription()}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="new-position-input" class="marker-important">Должность</label>
+                                                <select class="form-select" id="new-position-input" th:field="*{position}">
+                                                    <option th:each="position : ${AllPosition}" th:value="${position.getId()}" th:text="${position.getName()}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-ipPhone">Городской номер</label>
+                                                <input type="text" class="form-control" id="new-ipPhone" placeholder="**-**-**" th:field="*{phone}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Ошибка</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="new-ip-phone">IP Телефон</label>
+                                                <input type="text" class="form-control" id="new-ip-phone" placeholder="****" th:field="*{ipPhone}">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('ipPhone')}" th:errors="*{ipPhone}">Ошибка</small>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="form-group">
+                                                <label for="new-address-input">Адрес</label>
+                                                <select class="form-select" id="new-address-input" th:field="*{address}">
+                                                    <option th:each="address: ${AllAddress}" th:value="${address.getId()}" th:text="${address.getCity() + ' ' + address.getStreet() + ' ' + address.getHouse()}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="new-cabinet-number-input">Номер кабинета</label>
+                                                <input type="text" class="form-control" id="new-cabinet-number-input" placeholder="***">
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('cabinetNumber')}" th:errors="*{cabinetNumber}">Ошибка</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-success float-end">Добавить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="administrator-tab-pane" role="tabpanel" aria-labelledby="administrator-tab" tabindex="0">.4.</div>
+            <div class="tab-pane fade" id="inform-tab-pane" role="tabpanel" aria-labelledby="inform-tab" tabindex="0">.5.</div>
+        </div>
     </div>
     <div class="container-fluid py-4">
         <footer class="footer pt-3  ">

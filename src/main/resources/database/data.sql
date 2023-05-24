@@ -21,6 +21,9 @@ VALUES (1, '2022-07-26 00:40:30.000000', 'IT Отдел', 'Отдел экспл
 INSERT INTO dashboard.address (id, city, frame, house, street)
 VALUES (1, 'г.Чита', null, '160Б', 'ул.Чкалова');
 
+INSERT INTO dashboard.address (id, city, frame, house, street)
+VALUES (2, 'г.Чита', null, '160', 'ул.Чкалова');
+
 -- --------------------------------------------------------------------------------------------------------------- --
 
 INSERT INTO dashboard.position (id, name)

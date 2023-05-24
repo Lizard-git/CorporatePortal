@@ -74,9 +74,6 @@
     border-right: 1px solid !important;
     border-color: rgb(209 214 218) !important;
 }
-select {
-    appearance: auto !important;
-}
 
 .marker-important:after {
     content: " *";

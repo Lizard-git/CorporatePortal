@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -25,7 +25,7 @@ public class HistoryEntity {
 
     @CreatedDate
     @Column(name = "dateAction", nullable = false)
-    private Date dateAction;
+    private LocalDateTime dateAction;
 
     @ManyToOne
     @JoinColumn(name = "idUser", nullable = false)

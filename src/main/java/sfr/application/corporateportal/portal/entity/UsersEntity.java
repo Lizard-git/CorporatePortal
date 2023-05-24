@@ -65,20 +65,20 @@ public class UsersEntity {
     @Column(name = "isEnabled")
     private Boolean isEnabled;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinColumn(name = "dataUser", nullable = false)
     private DataUsersEntity data;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<NewsEntity> news;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<ChatsEntity> chats;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<ChatUsersEntity> chatsUsers;
 
-    @OneToMany(mappedBy = "userAdd")
+    @OneToMany(mappedBy = "userAdd", cascade = CascadeType.REMOVE)
     private List<FilesEntity> files;
 
     @ManyToMany(fetch = FetchType.EAGER)

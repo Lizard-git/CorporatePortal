@@ -81,10 +81,10 @@
                                         <ul class="list-group">
                                             <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                                     class="text-dark">Адрес:</strong> &nbsp;
-                                                <span th:if="${User.getData().getIdAddress().getFrame() != null}"
-                                                      th:text="${User.getData().getIdAddress().getCity() + ' ' + User.getData().getIdAddress().getStreet() + ' ' + User.getData().getIdAddress().getHouse() + ' ' + User.getData().getIdAddress().getFrame()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
-                                                <span th:if="${User.getData().getIdAddress().getFrame() == null}"
-                                                      th:text="${User.getData().getIdAddress().getCity() + ' ' + User.getData().getIdAddress().getStreet() + ' ' + User.getData().getIdAddress().getHouse()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
+                                                <span th:if="${User.getData().getAddress().getFrame() != null}"
+                                                      th:text="${User.getData().getAddress().getCity() + ' ' + User.getData().getAddress().getStreet() + ' ' + User.getData().getAddress().getHouse() + ' ' + User.getData().getAddress().getFrame()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
+                                                <span th:if="${User.getData().getAddress().getFrame() == null}"
+                                                      th:text="${User.getData().getAddress().getCity() + ' ' + User.getData().getAddress().getStreet() + ' ' + User.getData().getAddress().getHouse()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
                                             </li>
                                             <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                                     class="text-dark">Городской номер:</strong> &nbsp;
@@ -143,18 +143,17 @@
                                 <div class="table-responsive">
                                     <table class="table table-hover m-0">
                                         <tbody>
-                                        <tr th:each="user: ${Users}" style="cursor: pointer"
-                                            onclick="locationDocument(this)" th:href="'/users/get/' + ${user.getId()}">
+                                        <tr th:each="user: ${Users}" style="cursor: pointer" onclick="locationDocument(this)" th:href="'/users/get/' + ${user.getId()}">
                                             <th></th>
                                             <td class="w-100"
-                                                th:text="${user.getSurname() + ' ' + user.getName() + ' ' + user.getMiddleName()}"></td>
+                                                th:text="${user.getData().getSurname() + ' ' + user.getData().getName() + ' ' + user.getData().getMiddleName()}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <div th:replace="/portal/fragments/pagination.html::pagination(${Users}, '/users/')"></div>
+<!--                                <div th:replace="/portal/fragments/pagination.html::pagination(${Users}, '/users/')"></div>-->
                             </div>
                         </div>
                     </div>

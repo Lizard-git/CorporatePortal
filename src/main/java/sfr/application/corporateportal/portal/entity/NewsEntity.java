@@ -38,6 +38,10 @@ public class NewsEntity {
     @Column(name = "URLImg", length = 1500)
     private String urlImg;
 
+    //Добавить при следующем рендеренге базы
+//    @Column(name = "type")
+//    private String type;
+
     @CreatedDate
     @Column(name = "creationDate")
     private Date creationDate;

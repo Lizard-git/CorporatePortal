@@ -24,14 +24,8 @@ public class UsersController {
 
     @GetMapping("/get/{id}")
     public String UserPage(Model model, @PathVariable Long id) {
-        model.addAttribute("AllUsers", userRepository.findAll());
-        return "portal/users";
-    }
-
-    @GetMapping("/add")
-    public String AddUserPage(Model model) {
-        model.addAttribute("AllUsers", userRepository.findAll());
-        return "portal/users";
+        model.addAttribute("User", userRepository.getReferenceById(id));
+        return "portal/profile";
     }
 
     @PostMapping("/add")

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -39,9 +40,9 @@ public class DataUsersEntity {
     private String middleName;
 
     //Адрес
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idAddress")
-    private AddressEntity idAddress;
+    private AddressEntity address;
 
     //IP телефон
     @Size(max = 4, min = 4, message = "В IP номере 4 цифры")
@@ -68,10 +69,12 @@ public class DataUsersEntity {
 
     //Опыт сотрудника (стаж)
     @Column(name = "dateExperience")
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateExperience;
 
     //Дата рождения
     @Column(name = "dateBirthday")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateBirthday;
 
     //Номер кабинета
