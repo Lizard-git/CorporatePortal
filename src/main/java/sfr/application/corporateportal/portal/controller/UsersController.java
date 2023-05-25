@@ -10,8 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sfr.application.corporateportal.portal.dto.input_entity_dto.CreateUserDTO;
 import sfr.application.corporateportal.portal.entity.UsersEntity;
-import sfr.application.corporateportal.portal.service.SecurityService;
-import sfr.application.corporateportal.portal.service.UsersService;
+import sfr.application.corporateportal.portal.service.*;
 
 @Controller
 @RequestMapping("/users")
@@ -19,6 +18,9 @@ import sfr.application.corporateportal.portal.service.UsersService;
 public class UsersController {
     private final SecurityService securityService;
     private final UsersService usersService;
+    private final DepartmentsService departmentsService;
+    private final PositionService positionService;
+    private final AddressService addressService;
 
     @GetMapping("")
     public String UsersPage(Model model) {
@@ -28,9 +30,25 @@ public class UsersController {
 
     @GetMapping("/get/{id}")
     public String UserPage(Model model, @PathVariable Long id) {
-        UsersEntity user =  usersService.getById(id);
+        model.addAttribute("User", usersService.getById(id));
+        model.addAttribute("DataUser", usersService.getById(id).getData());
+        // -------------------------------------
 
-        model.addAttribute("User", user);
+        // Адреса
+        model.addAttribute("AllAddress", addressService.getAllAddress());
+        // -------------------------------------
+
+        // Отделы
+        model.addAttribute("AllDepartments", departmentsService.getAllDepartment());
+        // -------------------------------------
+
+        // Позиции
+        model.addAttribute("AllPosition", positionService.getAllPosition());
+        // -------------------------------------
+
+        // Роли
+        model.addAttribute("AllRoles", securityService.getAllRoles());
+        // -------------------------------------
         return "portal/profile";
     }
 

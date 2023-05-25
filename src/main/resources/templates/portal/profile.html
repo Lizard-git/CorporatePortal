@@ -59,14 +59,14 @@
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
                             <span th:text="${User.getData().getDepartments().getName()}">Отдел рпоарл аор лаор лаопрлралопрлоарлоарлоар лаопролрлаорлоар паолрплаорлаорлоар алопрлоар оларлоа рлаоро</span>
-                            / <span th:text="${User.getData().getPosition().getName()}">Должность</span>
+                            <span th:text="${User.getData().getPosition().getName()}">Должность</span>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4" >
         <div class="row">
             <div class="col-12">
 
@@ -128,6 +128,151 @@
                                         <nobr th:text="${User.getData().getIpAddressPC()}">10.85.5.4</nobr>
                                     </li>
                                 </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header pt-3 pb-0 pe-2">
+                            <h5 class="text-muted">Личные данные</h5>
+                        </div>
+                                <div class="card-body mt-0 pt-0">
+                                    <form method="post" th:action="@{/users/new}" th:object="${DataUser}">
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 col-xl-4">
+                                                <div class="form-group">
+                                                    <label for="surname-input">Фамилия</label>
+                                                    <input type="text" class="form-control" id="surname-input" placeholder="Фамилия" th:field="*{surname}">
+                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Ошибка</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="name-input">Имя</label>
+                                                    <input type="text" class="form-control" id="name-input" placeholder="Имя" th:field="*{name}">
+                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="middle-name-input">Отчество</label>
+                                                    <input type="text" class="form-control" id="middle-name-input" placeholder="Отчество" th:field="*{middleName}">
+                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">Ошибка</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="date-birthday">Дата рождения</label>
+                                                    <input type="date" class="form-control" id="date-birthday" th:field="*{dateBirthday}">
+                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('dateBirthday')}" th:errors="*{dateBirthday}">Ошибка</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="mobile-phone">Мобильный телефон</label>
+                                                    <input type="text" class="form-control" id="mobile-phone" placeholder="+* (***) ***-**-**" th:field="*{mobilePhone}">
+                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('mobilePhone')}" th:errors="*{mobilePhone}">Ошибка</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6 col-xl-4">
+                                                <div class="form-group">
+                                                    <label for="ip-phone">IP Телефон</label>
+                                                    <input type="text" class="form-control" id="ip-phone" placeholder="****" th:field="*{ipPhone}">
+                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('ipPhone')}" th:errors="*{ipPhone}">Ошибка</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="ipPhone">Городской номер</label>
+                                                    <input type="text" class="form-control" id="ipPhone" placeholder="**-**-**" th:field="*{phone}">
+                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Ошибка</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="home-email">Email (личный)</label>
+                                                    <input type="text" class="form-control" id="home-email" placeholder="test@gmail.com" th:field="*{homeEmail}">
+                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('homeEmail')}" th:errors="*{homeEmail}">Ошибка</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="work-email">Email (рабочий)</label>
+                                                    <input type="text" class="form-control" id="work-email" placeholder="test@75.sfr.gov.ru" th:field="*{workEmail}">
+                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('workEmail')}" th:errors="*{workEmail}">Ошибка</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="ip-address-pc-input">IP Адрес компьютера</label>
+                                                    <input type="text" class="form-control" id="ip-address-pc-input" placeholder="***" th:field="*{ipAddressPC}">
+                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('ipAddressPC')}" th:errors="*{ipAddressPC}">Ошибка</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6 col-xl-4">
+                                                <div class="form-group">
+                                                    <label for="address-input">Адрес</label>
+                                                    <select class="form-select" id="address-input" th:field="*{address}">
+                                                        <option th:each="address: ${AllAddress}" th:value="${address.getId()}" th:text="${address.getCity() + ' ' + address.getStreet() + ' ' + address.getHouse()}"></option>
+                                                    </select>
+                                                    <!--                                                <input list="address-list" class="form-control" id="address-input" name="address" placeholder="г.Чита ул.Чкалова 160Б" th:field="*{address}">-->
+                                                    <!--                                                <datalist id="address-list">-->
+                                                    <!--                                                    <option th:each="address: ${AllAddress}" th:value="${address.getId()}" th:text="${address.getCity() + '' + address.getStreet() + '' + address.getHouse()}"></option>-->
+                                                    <!--                                                </datalist>-->
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="department-input">Отдел</label>
+                                                    <select class="form-select" id="department-input" th:field="*{departments}">
+                                                        <option th:each="department : ${AllDepartments}" th:value="${department.getId()}" th:text="${department.getName()}" th:title="${department.getDescription()}"></option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="position-input">Должность</label>
+                                                    <select class="form-select" id="position-input" th:field="*{position}">
+                                                        <option th:each="position : ${AllPosition}" th:value="${position.getId()}" th:text="${position.getName()}"></option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cabinet-number-input">Номер кабинета</label>
+                                                    <input type="text" class="form-control" id="cabinet-number-input" placeholder="***" th:field="*{cabinetNumber}">
+                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('cabinetNumber')}" th:errors="*{cabinetNumber}">Ошибка</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-success float-end">Изменить</button>
+                                    </form>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header pt-3 pb-0 pe-2">
+                            <h5 class="text-muted">Роли</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h6>Добавить роль для пользователя</h6>
+                                    <form>
+                                        <div class="row">
+                                        <div class="form-group">
+                                            <select class="form-select" th:each="role: ${AllRoles}">
+                                                <option selected >Выберете роль</option>
+                                                <option th:text="${role.name}" th:value="${role.id}"></option>
+                                            </select>
+                                            <button  class="btn btn-outline-success " type="submit" name="addRole">Добавить</button>
+                                        </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col">
+                                    <h3>Роли</h3>
+                                    <ul th:each="role: ${User.getRoles()}" class="list-group" >
+                                        <form>
+                                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"  >
+                                            <strong class="text-dark" th:text="${role.name}"></strong>
+                                            <a><img width="22" height="22" src="/portal/fonts/icons/delete.svg"></a>
+                                        </li>
+                                        </form>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
