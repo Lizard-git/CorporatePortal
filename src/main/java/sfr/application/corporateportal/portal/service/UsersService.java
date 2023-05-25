@@ -27,6 +27,18 @@ public class UsersService {
     private final PasswordEncoder passwordEncoder;
     private final HistoryService historyService;
 
+    public UsersEntity getById(Long id) {
+        return userRepository.findById(id).get();
+    }
+
+    /**
+     * Получает список всех пользователей из БД
+     * @return List<UsersEntity>
+     */
+    public List<UsersEntity> getAll() {
+        return userRepository.findAll();
+    }
+
     /**
      * Метод получает пользователя из базы данных по его логину
      * @param login - Логин пользователя
