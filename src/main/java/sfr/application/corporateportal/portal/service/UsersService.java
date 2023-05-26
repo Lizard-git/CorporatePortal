@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import sfr.application.corporateportal.portal.dto.input_entity_dto.AuthDataDTO;
 import sfr.application.corporateportal.portal.dto.input_entity_dto.CreateUserDTO;
 import sfr.application.corporateportal.portal.entity.DataUsersEntity;
 import sfr.application.corporateportal.portal.entity.DepartmentsEntity;
@@ -31,6 +32,9 @@ public class UsersService {
         return userRepository.findById(id).get();
     }
 
+    public DataUsersEntity getDataUserById(Long id) {
+        return dataUserRepository.findById(id).get();
+    }
     /**
      * Получает список всех пользователей из БД
      * @return List<UsersEntity>
@@ -126,6 +130,31 @@ public class UsersService {
                 historyService.addNewHistory("ОШИБКА! При изменении пользователя: " + userDB.getLogin() + " произошла ошибка! Обратитесь к администратору.", userAction);
             }
         }
+    }
+
+    /**
+     * Метод для изменения данных пользователя
+     * @param dataUser - изменяемый пользователь
+     * @param userAction - тот, кто меняет
+     */
+    public void changeDataUser(DataUsersEntity dataUser, UsersEntity userAction) {
+        DataUsersEntity dataDB = dataUserRepository.findById(dataUser.getId()).get();
+        if (!dataUser.equals(dataDB)) {
+            dataUser.setUser(dataDB.getUser());
+            dataUser.setDateExperience(dataDB.getDateExperience());
+            try {
+                dataUserRepository.save(dataUser);
+                log.info("Change data user!");
+                historyService.addNewHistory("Изменены данные пользователя: " + dataUser.getUser().getLogin(), userAction);
+            } catch (Exception e) {
+                log.error("Error change data user!");
+                historyService.addNewHistory("ОШИБКА! При изменении данных пользователя: " + dataUser.getUser().getLogin() + " произошла ошибка! Обратитесь к администратору.", userAction);
+            }
+        }
+    }
+
+    public void changeDataAuth(AuthDataDTO dataUsers, UsersEntity user) {
+
     }
 
     /**

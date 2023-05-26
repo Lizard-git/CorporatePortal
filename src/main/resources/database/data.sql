@@ -1,15 +1,39 @@
 INSERT INTO dashboard.authority (id, description, name, shortname)
 VALUES (1, 'All access point', 'SuperAdmin', 'SuperAdmin');
 
+INSERT INTO dashboard.authority (id, description, name, shortname)
+VALUES (2, 'For MSZ app', 'AdminMSZ', 'Admin');
+
+INSERT INTO dashboard.authority (id, description, name, shortname)
+VALUES (3, 'For MSZ app', 'UserMSZ', 'User');
+
+INSERT INTO dashboard.authority (id, description, name, shortname)
+VALUES (4, 'For ATSBeeline', 'AdminATSBeeline', 'Admin');
+
 -- --------------------------------------------------------------------------------------------------------------- --
 
 INSERT INTO dashboard.roles (id, description, name, shortname)
 VALUES (1, 'All access point', 'ROLE_SuperAdmin', 'SuperAdmin');
 
+INSERT INTO dashboard.roles (id, description, name, shortname)
+VALUES (2, 'Administrator in all applications', 'ROLE_AllAdmin', 'Admin');
+
+INSERT INTO dashboard.roles (id, description, name, shortname)
+VALUES (3, 'User for application of social protection measures', 'ROLE_UserMSZ', 'UserMSZ');
+
 -- --------------------------------------------------------------------------------------------------------------- --
 
 INSERT INTO dashboard.roles_authority (role_id, authority_id)
 VALUES (1, 1);
+
+INSERT INTO dashboard.roles_authority (role_id, authority_id)
+VALUES (2, 2);
+
+INSERT INTO dashboard.roles_authority (role_id, authority_id)
+VALUES (2, 4);
+
+INSERT INTO dashboard.roles_authority (role_id, authority_id)
+VALUES (3, 3);
 
 -- --------------------------------------------------------------------------------------------------------------- --
 
@@ -473,11 +497,17 @@ VALUES (2, '27', '2022-07-26 00:40:30.000000', '2021-06-26 00:40:39.000000', 'sa
 
 INSERT INTO dashboard.users (id, creationdate, deletedate, isaccountnonexpired, isaccountnonlocked,
                              iscredentialsnonexpired, isenabled, lastmodifieddate, login, password, datauser)
-VALUES (DEFAULT, '2023-04-26 16:49:22.000000', null, true, true, true, true, '2023-04-26 16:49:33.000000', 'PodimalovaMN', '$2a$12$2VDhsX0zfVscPXUuZqhUe.QAY3243G8sb94yhGDieyUpynKxNiRPm', 1);
+VALUES (1, '2023-04-26 16:49:22.000000', null, true, true, true, true, '2023-04-26 16:49:33.000000', 'PodimalovaMN', '$2a$12$2VDhsX0zfVscPXUuZqhUe.QAY3243G8sb94yhGDieyUpynKxNiRPm', 1);
 
 INSERT INTO dashboard.users (id, creationdate, deletedate, isaccountnonexpired, isaccountnonlocked,
                              iscredentialsnonexpired, isenabled, lastmodifieddate, login, password, datauser)
-VALUES (DEFAULT, '2023-04-26 16:49:22.000000', null, true, true, true, true, '2023-04-26 16:49:33.000000', 'Lizard', '$2a$12$2VDhsX0zfVscPXUuZqhUe.QAY3243G8sb94yhGDieyUpynKxNiRPm', 2);
+VALUES (2, '2023-04-26 16:49:22.000000', null, true, true, true, true, '2023-04-26 16:49:33.000000', 'Lizard', '$2a$12$2VDhsX0zfVscPXUuZqhUe.QAY3243G8sb94yhGDieyUpynKxNiRPm', 2);
+
+-- --------------------------------------------------------------------------------------------------------------- --
+
+UPDATE dashboard.datauser SET user_id = 1 WHERE id = 1;
+
+UPDATE dashboard.datauser SET user_id = 2 WHERE id = 2;
 
 -- --------------------------------------------------------------------------------------------------------------- --
 

@@ -1,0 +1,171 @@
+<!--
+=========================================================
+* Soft UI Dashboard - v1.0.7
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/portal/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/portal/img/favicon.png}">
+    <title>Настройки</title>
+    <!--     Fonts and icons     -->
+    <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />-->
+    <!-- Nucleo Icons -->
+    <link th:href="@{/portal/css/nucleo-icons.css}" rel="stylesheet"/>
+    <link th:href="@{/portal/css/nucleo-svg.css}" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <!--  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>-->
+    <!--  <link th:href="@{/css/nucleo-svg.css}" href="/resources/static/css/" rel="stylesheet" />-->
+    <!-- CSS Files -->
+    <link th:href="@{/portal/css/soft-ui-dashboard.css}" id="pagestyle" rel="stylesheet"/>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+<aside th:replace="~{/portal/fragments/sidebar-fragment.html::sidebar('/settings')}"></aside>
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <nav th:replace="~{/portal/fragments/header-fragment.html::header('Настройки')}"></nav>
+    <div class="container-fluid py-4">
+        <div th:replace="~{/portal/fragments/setting-header-fragment.html::setting_header('profile')}"></div>
+
+        <div class="row">
+            <div class="col">
+                <div class="card mt-3 mb-3">
+                    <div class="card-header"><h6 class="mb-0 pb-0">Данные пользователя</h6></div>
+                    <div class="card-body mt-0 pt-0">
+                        <form method="post" th:action="'/users/change/data/' + ${DataUser.getId()}" th:object="${DataUser}">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="surname-input">Фамилия</label>
+                                        <input type="text" class="form-control" id="surname-input" placeholder="Фамилия" th:field="*{surname}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name-input">Имя</label>
+                                        <input type="text" class="form-control" id="name-input" placeholder="Имя" th:field="*{name}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="middle-name-input">Отчество</label>
+                                        <input type="text" class="form-control" id="middle-name-input" placeholder="Отчество" th:field="*{middleName}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="date-birthday">Дата рождения</label>
+                                        <input type="date" class="form-control" id="date-birthday" th:field="*{dateBirthday}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('dateBirthday')}" th:errors="*{dateBirthday}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mobile-phone">Мобильный телефон</label>
+                                        <input type="text" class="form-control" id="mobile-phone" placeholder="+* (***) ***-**-**" th:field="*{mobilePhone}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('mobilePhone')}" th:errors="*{mobilePhone}">Ошибка</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="ip-phone">IP Телефон</label>
+                                        <input type="text" class="form-control" id="ip-phone" placeholder="****" th:field="*{ipPhone}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('ipPhone')}" th:errors="*{ipPhone}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ipPhone">Городской номер</label>
+                                        <input type="text" class="form-control" id="ipPhone" placeholder="**-**-**" th:field="*{phone}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="home-email">Email (личный)</label>
+                                        <input type="text" class="form-control" id="home-email" placeholder="test@gmail.com" th:field="*{homeEmail}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('homeEmail')}" th:errors="*{homeEmail}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="work-email">Email (рабочий)</label>
+                                        <input type="text" class="form-control" id="work-email" placeholder="test@75.sfr.gov.ru" th:field="*{workEmail}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('workEmail')}" th:errors="*{workEmail}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ip-address-pc-input">IP Адрес компьютера</label>
+                                        <input type="text" class="form-control" id="ip-address-pc-input" placeholder="***" th:field="*{ipAddressPC}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('ipAddressPC')}" th:errors="*{ipAddressPC}">Ошибка</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="address-input">Адрес</label>
+                                        <select class="form-select" id="address-input" th:field="*{address}">
+                                            <option th:each="address: ${AllAddress}" th:value="${address.getId()}" th:text="${address.getCity() + ' ' + address.getStreet() + ' ' + address.getHouse()}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="department-input">Отдел</label>
+                                        <select class="form-select" id="department-input" th:field="*{departments}">
+                                            <option th:each="department : ${AllDepartments}" th:value="${department.getId()}" th:text="${department.getName()}" th:title="${department.getDescription()}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="position-input">Должность</label>
+                                        <select class="form-select" id="position-input" th:field="*{position}">
+                                            <option th:each="position : ${AllPosition}" th:value="${position.getId()}" th:text="${position.getName()}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cabinet-number-input">Номер кабинета</label>
+                                        <input type="text" class="form-control" id="cabinet-number-input" placeholder="***" th:field="*{cabinetNumber}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('cabinetNumber')}" th:errors="*{cabinetNumber}">Ошибка</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-outline-success float-end">Изменить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-4">
+        <footer class="footer pt-3  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                        <div class="copyright text-center text-sm text-muted text-lg-start">
+                            © Alex Orl
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</main>
+<!--   Core JS Files   -->
+<script src="/portal/js/core/popper.min.js"></script>
+<script src="/portal/js/core/bootstrap.min.js"></script>
+<script src="/portal/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/portal/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/portal/js/plugins/chartjs.min.js"></script>
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+
+</script>
+<script src="/portal/js/soft-ui-dashboard.js"></script>
+</body>
+
+</html>

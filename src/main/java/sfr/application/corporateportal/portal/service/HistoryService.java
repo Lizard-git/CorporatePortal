@@ -24,6 +24,7 @@ public class HistoryService {
     public void addNewHistory(String msg, UsersEntity user) {
         HistoryEntity newHistory = HistoryEntity.builder()
                 .action(msg)
+                .dateAction(LocalDateTime.now())
                 .user(user)
                 .build();
         historyRepository.save(newHistory);

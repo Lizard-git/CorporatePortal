@@ -7,8 +7,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import sfr.application.corporateportal.portal.dto.input_entity_dto.CreateUserDTO;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import sfr.application.corporateportal.portal.dto.input_entity_dto.AuthDataDTO;
+import sfr.application.corporateportal.portal.entity.DataUsersEntity;
 import sfr.application.corporateportal.portal.entity.UsersEntity;
 import sfr.application.corporateportal.portal.service.*;
 
@@ -22,50 +27,56 @@ public class UsersController {
     private final PositionService positionService;
     private final AddressService addressService;
 
-    @GetMapping("")
-    public String UsersPage(Model model) {
-        model.addAttribute("AllUsers", usersService.getAll());
-        return "portal/users";
-    }
+    @PostMapping("/change/{id}")
+    public String ChangeAuthDataUser(
+            @PathVariable(name = "id") Long id,
+            @ModelAttribute("AuthData") @Valid AuthDataDTO dataUsers,
+            BindingResult bindingResult,
+            Model model) {
 
-    @GetMapping("/get/{id}")
-    public String UserPage(Model model, @PathVariable Long id) {
-        model.addAttribute("User", usersService.getById(id));
-        model.addAttribute("DataUser", usersService.getById(id).getData());
-        // -------------------------------------
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UsersEntity user = usersService.findByUserLogin(auth.getName());
 
-        // Адреса
-        model.addAttribute("AllAddress", addressService.getAllAddress());
-        // -------------------------------------
-
-        // Отделы
-        model.addAttribute("AllDepartments", departmentsService.getAllDepartment());
-        // -------------------------------------
-
-        // Позиции
-        model.addAttribute("AllPosition", positionService.getAllPosition());
-        // -------------------------------------
-
-        // Роли
-        model.addAttribute("AllRoles", securityService.getAllRoles());
-        // -------------------------------------
-        return "portal/profile";
-    }
-
-    @PostMapping("/add")
-    public String AddUser(@ModelAttribute("NewUser") @Valid CreateUserDTO userDTO,
-                          BindingResult bindingResult,
-                          Model model) {
-        if (!bindingResult.hasErrors()) {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            UsersEntity user = usersService.findByUserLogin(auth.getName());
-
-
-        } else {
-            model.addAttribute("Error", true);
-            return "redirect:/settings";
+        if (!dataUsers.getNewPassword().equals(dataUsers.getNewCheckPassword())) {
+            bindingResult.addError(new FieldError("AuthData", "newPassword" ,  "Пароли не совпадают"));
+            bindingResult.addError(new FieldError("AuthData", "newCheckPassword" ,  "Пароли не совпадают"));
         }
 
-        return "portal/users";
+        if (!bindingResult.hasErrors()) {
+            usersService.changeDataAuth(dataUsers, user);
+        } else {
+            model.addAttribute("User", user);
+            return "portal/settings-page/settings-security";
+        }
+        return "redirect:/settings";
+    }
+
+    @PostMapping("/change/data/{id}")
+    public String ChangeDataUser(
+            @PathVariable(name = "id") Long id,
+            @ModelAttribute("DataUser") @Valid DataUsersEntity dataUsers,
+            BindingResult bindingResult,
+            Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UsersEntity user = usersService.findByUserLogin(auth.getName());
+        dataUsers.setId(id);
+        if (!bindingResult.hasErrors()) {
+            usersService.changeDataUser(dataUsers, user);
+        } else {
+            // Адреса
+            model.addAttribute("AllAddress", addressService.getAllAddress());
+            // -------------------------------------
+
+            // Отделы
+            model.addAttribute("AllDepartments", departmentsService.getAllDepartment());
+            // -------------------------------------
+
+            // Позиции
+            model.addAttribute("AllPosition", positionService.getAllPosition());
+            // -------------------------------------
+            return "portal/settings-page/settings-profile";
+        }
+        return "redirect:/settings";
     }
 }
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<ul th:fragment="setting_header(active)" class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" th:classappend="${active == 'profile'} ? 'active'" aria-current="page" href="/settings/profile">Профиль</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" th:classappend="${active == 'security'} ? 'active'" href="/settings/security">Безопастность</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" th:classappend="${active == 'user-security'} ? 'active'" href="/settings/user/security">Сотруднику безопастнсти</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" th:classappend="${active == 'user-admin'} ? 'active'" href="/settings/user/administrator">Администратору</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" th:classappend="${active == 'additionally'} ? 'active'" href="/settings/additionally">Дополнительно</a>
+    </li>
+</ul>
+</body>
+</html>

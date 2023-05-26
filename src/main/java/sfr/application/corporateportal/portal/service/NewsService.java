@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import sfr.application.corporateportal.portal.entity.NewsEntity;
 import sfr.application.corporateportal.portal.entity.UsersEntity;
+import sfr.application.corporateportal.portal.repository.CommentRepository;
 import sfr.application.corporateportal.portal.repository.NewsRepository;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 public class NewsService {
     private final NewsRepository newsRepository;
     private final HistoryService historyService;
+    public final CommentRepository commentRepository;
     /**
      * Метод получает все новости (опубликованные, неопубликованные, предложенные)
      * @return

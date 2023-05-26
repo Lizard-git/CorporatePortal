@@ -35,7 +35,7 @@ public class DataUsersEntity {
     private String name;
 
     //Отчество
-    @Size(max = 100, min = 2,message = "Отчество должно быть от 2 до 100 символов")
+    @Size(max = 100, message = "Отчество должно быть до 100 символов")
     @Column(name = "middleName", length = 100)
     private String middleName;
 
@@ -93,6 +93,6 @@ public class DataUsersEntity {
     @JoinColumn(name = "position")
     private PositionEntity position;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private UsersEntity user;
 }

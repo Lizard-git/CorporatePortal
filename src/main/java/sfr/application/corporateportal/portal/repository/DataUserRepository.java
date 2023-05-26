@@ -7,11 +7,13 @@ import sfr.application.corporateportal.portal.entity.DataUsersEntity;
 import sfr.application.corporateportal.portal.entity.DepartmentsEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DataUserRepository extends JpaRepository<DataUsersEntity, Long> {
 
     List<DataUsersEntity> getAllByDepartments(DepartmentsEntity departments);
     Page<DataUsersEntity> getAllByDepartments(DepartmentsEntity departments, Pageable pageable);
 
+    Optional<DataUsersEntity> findById (Long id);
 
 }
