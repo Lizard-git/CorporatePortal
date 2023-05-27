@@ -38,11 +38,47 @@
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <nav th:replace="~{/portal/fragments/header-fragment.html::header('Профиль пользователя')}"></nav>
-    <div class="container-fluid">
+    <div class="container-lg mx-4 py-4" style="height: 78vh; width: 90%">
+        <div class="row align-items-stretch height-500">
 
-    </div>
-    <div class="container-fluid py-4">
-        messenger
+            <div class="col col-3">
+                <h5>Чаты</h5>
+                <ul class="list-group overflow-y-scroll  height-500">
+                    <li class="list-group-item list-group-item-action" id="chat_1" onclick="openDialog(1)">Элемент 1</li>
+                    <li class="list-group-item list-group-item-action" id="chat_2"  onclick="openDialog(2)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" id="chat_3"  onclick="openDialog(3)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" id="chat_4"  onclick="openDialog(4)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" id="chat_5"  onclick="openDialog(5)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" id="chat_6"  onclick="openDialog(6)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" onclick="openDialog(7)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" onclick="openDialog(8)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" onclick="openDialog(9)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" onclick="openDialog(10)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" onclick="openDialog(11)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" onclick="openDialog(12)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" onclick="openDialog(13)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" onclick="openDialog(14)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" onclick="openDialog(15)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" onclick="openDialog(16)">Элемент</li>
+                    <li class="list-group-item list-group-item-action" onclick="openDialog(17)">Элемент</li>
+
+
+
+                </ul>
+            </div>
+            <div class="col d-flex flex-column end-0">
+                <div class="flex-column max-height-vh-100 h-100 rounded mb-2" style="background-color: #fff" id="historyChat">
+                    Прошлые сообщения
+                </div>
+
+                    <div class="sticky-bottom form-control">
+                        <form>
+                    <input class="form-control" name="message" type="text"> <button class="btn btn-success"> Отправить</button>
+                    </form>
+                    </div>
+
+            </div>
+        </div>
     </div>
     <div class="container-fluid py-4">
         <footer class="footer pt-3  ">
@@ -72,6 +108,12 @@
         }
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+
+    function openDialog(id) {
+        document.getElementById("historyChat").innerText = "chat"+id;
+        //document.getElementById("chat_"+id).classList.add("active");
+    }
+
 </script>
 <script src="/portal/js/soft-ui-dashboard.js"></script>
 </body>
