@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import sfr.application.corporateportal.portal.entity.AddressEntity;
 import sfr.application.corporateportal.portal.entity.DepartmentsEntity;
 import sfr.application.corporateportal.portal.entity.PositionEntity;
@@ -29,7 +30,7 @@ public class CreateUserDTO {
     private String password;
 
     //Роль пользователя
-    @NotEmpty(message = "Роль не может быть пустой")
+    //@NotEmpty(message = "Роль не может быть пустой")
     private RolesEntity role;
 
     //Фамилия
@@ -50,8 +51,7 @@ public class CreateUserDTO {
     private AddressEntity address;
 
     //IP телефон
-    @Size(max = 4, min = 4, message = "В IP номере 4 цифры")
-    private String ipPhone;
+    private Long ipPhone;
 
     //Телефон
     private String phone;
@@ -68,6 +68,7 @@ public class CreateUserDTO {
     private String homeEmail;
 
     //Дата рождения
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateBirthday;
 
     //Номер кабинета

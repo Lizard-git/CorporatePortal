@@ -85,7 +85,7 @@ public class UsersService {
                         .address(user.getAddress())
                         .cabinetNumber(user.getCabinetNumber())
                         .ipAddressPC(user.getIpAddressPC())
-                        .ipPhone(user.getIpPhone())
+                        .ipPhone(user.getIpPhone().toString())
                         .phone(user.getPhone())
                         .workEmail(user.getWorkEmail())
                         .position(user.getPosition())

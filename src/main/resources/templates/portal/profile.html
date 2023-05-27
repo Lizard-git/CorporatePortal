@@ -206,10 +206,6 @@
                                                     <select class="form-select" id="address-input" th:field="*{address}">
                                                         <option th:each="address: ${AllAddress}" th:value="${address.getId()}" th:text="${address.getCity() + ' ' + address.getStreet() + ' ' + address.getHouse()}"></option>
                                                     </select>
-                                                    <!--                                                <input list="address-list" class="form-control" id="address-input" name="address" placeholder="г.Чита ул.Чкалова 160Б" th:field="*{address}">-->
-                                                    <!--                                                <datalist id="address-list">-->
-                                                    <!--                                                    <option th:each="address: ${AllAddress}" th:value="${address.getId()}" th:text="${address.getCity() + '' + address.getStreet() + '' + address.getHouse()}"></option>-->
-                                                    <!--                                                </datalist>-->
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="department-input">Отдел</label>
@@ -252,9 +248,9 @@
                                     <form>
                                         <div class="row">
                                         <div class="form-group">
-                                            <select class="form-select" th:each="role: ${AllRoles}">
+                                            <select class="form-select" >
                                                 <option selected >Выберете роль</option>
-                                                <option th:text="${role.name}" th:value="${role.id}"></option>
+                                                <option th:each="role: ${AllRoles}" th:text="${role.name}" th:value="${role.id}"></option>
                                             </select>
                                             <button  class="btn btn-outline-success " type="submit" name="addRole">Добавить</button>
                                         </div>
@@ -263,14 +259,12 @@
                                     </form>
                                 </div>
                                 <div class="col">
-                                    <h3>Роли</h3>
-                                    <ul th:each="role: ${User.getRoles()}" class="list-group" >
-                                        <form>
-                                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"  >
+                                    <h6>Роли</h6>
+                                    <ul class="list-group" >
+                                        <li th:each="role: ${User.getRoles()}" class="list-group-item border-0 ps-0 pt-0 text-sm"  >
                                             <strong class="text-dark" th:text="${role.name}"></strong>
                                             <a><img width="22" height="22" src="/portal/fonts/icons/delete.svg"></a>
                                         </li>
-                                        </form>
                                     </ul>
                                 </div>
                             </div>

@@ -40,6 +40,146 @@
     <nav th:replace="~{/portal/fragments/header-fragment.html::header('Настройки')}"></nav>
     <div class="container-fluid py-4">
         <div th:replace="~{/portal/fragments/setting-header-fragment.html::setting_header('user-security')}"></div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card mt-3 mb-3">
+                    <div class="card-header">
+                        <h6 class="mb-0 pb-0">Создание нового пользователя</h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" th:action="@{/users/save}" th:object="${NewUser}">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-login-input" class="marker-important">Логин</label>
+                                        <input type="text" class="form-control" id="new-login-input" placeholder="OrlovAE" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" th:field="*{login}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Ошибка</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-password-input" class="marker-important">Пароль</label>
+                                        <input type="password" class="form-control" id="new-password-input" placeholder="******" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" th:field="*{password}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Ошибка</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-role-input">Роль</label>
+                                        <select class="form-select" id="new-role-input" th:field="*{role}">
+                                            <option th:each="role: ${AllRoles}" th:value="${role.getId()}" th:text="${role.getShortName()}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-surname-input" class="marker-important">Фамилия</label>
+                                        <input type="text" class="form-control" id="new-surname-input" placeholder="Фамилия" th:field="*{surname}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Ошибка</small>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-name-input" class="marker-important">Имя</label>
+                                        <input type="text" class="form-control" id="new-name-input" placeholder="Имя" th:field="*{name}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка</small>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-middle-name-input" class="marker-important">Отчество</label>
+                                        <input type="text" class="form-control" id="new-middle-name-input" placeholder="Отчество" th:field="*{middleName}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">Ошибка</small>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-home-email">Email (личный)</label>
+                                        <input type="text" class="form-control" id="new-home-email" placeholder="test@gmail.com" th:field="*{homeEmail}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('homeEmail')}" th:errors="*{homeEmail}">Ошибка</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-mobile-phone">Мобильный телефон</label>
+                                        <input type="text" class="form-control" id="new-mobile-phone" placeholder="+* (***) ***-**-**" th:field="*{mobilePhone}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('mobilePhone')}" th:errors="*{mobilePhone}">Ошибка</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-date-birthday" class="marker-important">Дата рождения</label>
+                                        <input type="date" class="form-control" id="new-date-birthday" th:field="*{dateBirthday}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('dateBirthday')}" th:errors="*{dateBirthday}">Ошибка</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-work-email">Email (рабочий)</label>
+                                        <input type="text" class="form-control" id="new-work-email" placeholder="test@75.sfr.gov.ru" th:field="*{workEmail}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('workEmail')}" th:errors="*{workEmail}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-ip-address-pc-input">IP Адрес компьютера</label>
+                                        <input type="text" class="form-control" id="new-ip-address-pc-input" placeholder="***" th:field="*{ipAddressPC}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('ipAddressPC')}" th:errors="*{ipAddressPC}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-department-input" class="marker-important">Отдел</label>
+                                        <select class="form-select" id="new-department-input" th:field="*{department}">
+                                            <option th:each="department : ${AllDepartments}" th:value="${department.getId()}" th:text="${department.getName()}" th:title="${department.getDescription()}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-position-input" class="marker-important">Должность</label>
+                                        <select class="form-select" id="new-position-input" th:field="*{position}">
+                                            <option th:each="position : ${AllPosition}" th:value="${position.getId()}" th:text="${position.getName()}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-ipPhone">Городской номер</label>
+                                        <input type="text" class="form-control" id="new-ipPhone" placeholder="**-**-**" th:field="*{phone}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Ошибка</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-ip-phone">IP Телефон</label>
+                                        <input type="number" class="form-control" id="new-ip-phone" placeholder="****" th:field="*{ipPhone}">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('ipPhone')}" th:errors="*{ipPhone}">Ошибка</small>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group">
+                                        <label for="new-address-input">Адрес</label>
+                                        <select class="form-select" id="new-address-input" th:field="*{address}">
+                                            <option th:each="address: ${AllAddress}" th:value="${address.getId()}" th:text="${address.getCity() + ' ' + address.getStreet() + ' ' + address.getHouse()}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-cabinet-number-input">Номер кабинета</label>
+                                        <input type="text" class="form-control" id="new-cabinet-number-input" placeholder="***">
+                                        <small class="form-text text-danger" th:if="${#fields.hasErrors('cabinetNumber')}" th:errors="*{cabinetNumber}">Ошибка</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-outline-success float-end">Добавить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container-fluid py-4">
         <footer class="footer pt-3  ">
