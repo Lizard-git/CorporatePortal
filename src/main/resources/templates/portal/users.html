@@ -20,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/portal/img/apple-icon.png}">
     <link rel="icon" type="image/png" th:href="@{/portal/img/favicon.png}">
-    <title>Авторизация</title>
+    <title>Пользователи</title>
     <!--     Fonts and icons     -->
     <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />-->
     <!-- Nucleo Icons -->
@@ -38,83 +38,11 @@
 <aside th:replace="~{/portal/fragments/sidebar-fragment.html::sidebar('/users')}"></aside>
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <nav th:replace="~{/portal/fragments/header-fragment.html::header('Профиль пользователя')}"></nav>
-    <div class="container-fluid">
-
-    </div>
+    <nav th:replace="~{/portal/fragments/header-fragment.html::header('Все пользователи')}"></nav>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <!--        <div class="card-header">-->
-                    <!--          <div class="row">-->
-
-                    <!--            <div class="col-12 col-xl-2">-->
-                    <!--              <div class="input-group">-->
-                    <!--                <select class="form-control">-->
-                    <!--                  <option value="" disabled selected>Адрес</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                </select>-->
-                    <!--              </div>-->
-                    <!--            </div>-->
-
-                    <!--            <div class="col-12 col-xl-2">-->
-                    <!--              <div class="input-group">-->
-                    <!--                <select class="form-control" >-->
-                    <!--                  <option value="" disabled selected>Отдел</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                </select>-->
-                    <!--              </div>-->
-                    <!--            </div>-->
-
-                    <!--            <div class="col-12 col-xl-2">-->
-                    <!--              <div class="input-group">-->
-                    <!--                <input type="text" id="inputFIO" class="form-control" placeholder="ФИО пользователя" aria-describedby="inputFIO">-->
-                    <!--              </div>-->
-                    <!--            </div>-->
-
-                    <!--            <div class="col-12 col-xl-2">-->
-                    <!--              <div class="input-group">-->
-                    <!--                <input type="text" id="phone" class="form-control" placeholder="Телефон" aria-describedby="inputFIO">-->
-                    <!--              </div>-->
-                    <!--            </div>-->
-
-                    <!--            <div class="col-12 col-xl-2">-->
-                    <!--              <div class="input-group">-->
-                    <!--                <select class="form-control" >-->
-                    <!--                  <option value="" disabled selected>Должность</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                  <option>A</option>-->
-                    <!--                </select>-->
-                    <!--              </div>-->
-                    <!--            </div>-->
-
-                    <!--            <div class="col-12 col-xl-2">-->
-                    <!--              <div class="input-group">-->
-                    <!--                <button type="button" class="btn bg-gradient-castom-ui m-0 w-100 p-2">Найти</button> &lt;!&ndash;add js function&ndash;&gt;-->
-                    <!--              </div>-->
-                    <!--            </div>-->
-                    <!--          </div>-->
-                    <!--          <div class="row">-->
-                    <!--            <div class="col-12">-->
-                    <!--              <div class="input-group mt-3">-->
-                    <!--                <button type="button" class="btn btn-light m-0 w-100">Отчистить</button> &lt;!&ndash;add js function&ndash;&gt;-->
-                    <!--              </div>-->
-                    <!--            </div>-->
-                    <!--          </div>-->
-
-                    <!--        </div>-->
                     <div class="card-body ">
                         <div class="table-responsive p-0">
                             <table id="table1" class="table table-striped align-items-center mb-0"
@@ -122,44 +50,39 @@
                                 <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        ФИО
+                                        Фамилия
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Отдел
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Имя
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Должность
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Отчество
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         IP телефон
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Телефон
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Должность
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Кабинет
-                                    </th>
-                                    <th class="text-warning text-uppercase text-xxs font-weight-bolder opacity-7">
-                                        Измение
-                                    </th>
-                                    <th class="text-danger text-uppercase text-xxs font-weight-bolder opacity-7">
-                                        Удаление
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Отдел
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="user:${AllUsers}" th:data-slug="${user.getId()}">
-                                    <td th:text="${user.getData().getSurname() + ' ' + user.getData().getName() + ' ' + user.getData().getMiddleName()}">
-                                        1
-                                    </td>
-                                    <td th:text="${user.getData().getDepartments().getName()}">1</td>
-                                    <td th:text="${user.getData().getPosition().getName()}">1</td>
-                                    <td th:text="${user.getData().getIpPhone()}">1</td>
-                                    <td th:text="${user.getData().getPhone()}">1</td>
-                                    <td th:text="${user.getData().getCabinetNumber()}">1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                </tr>
+<!--                                <tr th:each="user:${AllUsers}" th:data-slug="${user.getId()}">-->
+<!--                                    <td th:text="${user.getData().getSurname() + ' ' + user.getData().getName() + ' ' + user.getData().getMiddleName()}">-->
+<!--                                        1-->
+<!--                                    </td>-->
+<!--                                    <td th:text="${user.getData().getDepartments().getName()}">1</td>-->
+<!--                                    <td th:text="${user.getData().getPosition().getName()}">1</td>-->
+<!--                                    <td th:text="${user.getData().getIpPhone()}">1</td>-->
+<!--                                    <td th:text="${user.getData().getPhone()}">1</td>-->
+<!--                                    <td th:text="${user.getData().getCabinetNumber()}">1</td>-->
+<!--                                    <td>1</td>-->
+<!--                                    <td>1</td>-->
+<!--                                </tr>-->
+
                                 </tbody>
                             </table>
                         </div>
@@ -200,22 +123,69 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
+    // $(document).ready(function () {
+    //     $('#table1').DataTable({
+    //         language: {
+    //             url: '/portal/ru.json'
+    //         },
+    //         "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+    //             var slug = $(nRow).data("slug");
+    //             $(nRow).attr("href", "/invoices/" + slug);
+    //             $(nRow).css('cursor', 'pointer');
+    //             $(nRow).click(function () {
+    //                 window.location = $(this).attr('href');
+    //                 return false;
+    //             });
+    //         }
+    //     });
+    //
+    //
+    // })
+
     $(document).ready(function () {
         $('#table1').DataTable({
             language: {
                 url: '/portal/ru.json'
             },
+            'ajax': {
+                'contentType': 'application/json',
+                'url': '/api/v1/users/get/all',
+                'type': 'POST',
+                'dataSrc': function (json) {
+                    let data = json.map(function (d) {
+                        return d;
+                    })
+                    return data;
+                }
+            },
+            columns : [{
+                data : 'surname'
+            }, {
+                data : 'name'
+            },  {
+                data : 'middleName'
+            },  {
+                data : 'ipPhone'
+            },  {
+                data : 'position.name'
+            },  {
+                data : 'departments.name'
+            }],
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                var slug = $(nRow).data("slug");
-                $(nRow).attr("href", "/invoices/" + slug);
-                $(nRow).css('cursor', 'pointer');
-                $(nRow).click(function () {
-                    window.location = $(this).attr('href');
+                $(nRow).css( 'cursor', 'pointer' );
+                $(nRow).click(function(){
+                    window.location = '/users/get/' + aData.id;
                     return false;
+                });
+                $(nRow).on("mousedown", function(e) {
+                    if (e.which === 2) {
+                        window.open('/users/get/' + aData.id) ;
+                        return false;
+                    }
                 });
             }
         });
-    })
+    });
 </script>
 <script src="/portal/js/soft-ui-dashboard.js"></script>
 

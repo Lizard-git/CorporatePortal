@@ -40,6 +40,54 @@
     <nav th:replace="~{/portal/fragments/header-fragment.html::header('Настройки')}"></nav>
     <div class="container-fluid py-4">
         <div th:replace="~{/portal/fragments/setting-header-fragment.html::setting_header('user-admin')}"></div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card mt-3">
+                    <div class="card-header pb-0">
+                        <h6>Создание новости</h6>
+                    </div>
+                    <div class="card-body pt-0">
+                        <form method="post" th:action="@{/news/add}" th:object="${NewNews}" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="new-login-input" class="marker-important">Заголовок</label>
+                                <input type="text" class="form-control" id="new-login-input" placeholder="Заголовок новости" th:field="*{title}">
+                                <small class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Ошибка</small>
+                            </div>
+                            <div class="form-group d-flex flex-column">
+                                <label for="new-login-input" class="marker-important">Изображение</label>
+                                <input type="file" id="title" name="avatar" accept="image/png, image/jpeg">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-position-input" class="marker-important">Статус новости</label>
+                                <select class="form-select" id="new-position-input" th:field="*{type}">
+                                    <option value="publish">Опубликовать сразу</option>
+                                    <option value="manual">Опубликовать в ручную</option>
+                                </select>
+                                <small class="form-text text-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Ошибка</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1" class="form-label marker-important">Содержание новости</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" maxlength="500" style="height: 225px" th:field="*{text}"></textarea>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary" href="/news/all">Все новости</button>
+                            <button type="submit" class="btn btn-outline-success float-end">Добавить</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header">
+
+                    </div>
+                    <div class="card-body">
+                        <form method="post" th:action="@{/apps/add}" th:object="${NewApp}">
+
+                            <button type="submit" class="btn btn-outline-success float-end">Добавить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container-fluid py-4">
         <footer class="footer pt-3  ">

@@ -20,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/portal/img/apple-icon.png}">
     <link rel="icon" type="image/png" th:href="@{/portal/img/favicon.png}">
-    <title>Авторизация</title>
+    <title>Новости</title>
     <!--     Fonts and icons     -->
     <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />-->
     <!-- Nucleo Icons -->
@@ -37,21 +37,21 @@
 <aside th:replace="~{/portal/fragments/sidebar-fragment.html::sidebar('/news')}"></aside>
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <nav th:replace="~{/portal/fragments/header-fragment.html::header('Профиль пользователя')}"></nav>
-    <div class="container-fluid">
-
-    </div>
+    <nav th:replace="~{/portal/fragments/header-fragment.html::header('Новости')}"></nav>
     <div class="container-fluid py-4 d-flex justify-content-center align-items-center">
         <div class="w-100 w-xxl-80">
             <div class="row">
-                <div class="col-12">
-                    <div class="card mb-4">
-                        <div class="card-header">title</div>
-                        <div class="card-body">
-                            <p>Описание</p>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                <div class="col-12 d-flex flex-column-reverse">
+
+                    <div th:each="news: ${News}" class="card mb-4">
+                        <div class="card-header pb-0">
+                            <img style="width: 100%; max-height: 600px; object-fit: cover; object-position: 50% 50%" th:src="${news.getUrlImg()}" alt="news">
                         </div>
-                        <div class="card-footer">
+                        <div class="card-body pt-2">
+                            <h4 th:text="${news.getTitle()}"></h4>
+                            <p th:text="${news.getText()}"></p>
+                        </div>
+                        <div th:if="${User} != null" class="card-footer">
                             <h6>Все комментарии: </h6>
                             <div class="max-height-200 overflow-auto">
                                 <div class="d-flex px-2 py-1">
@@ -65,89 +65,19 @@
                                             вапавпвапва пвап вап вап</p>
                                     </div>
                                 </div>
-                                <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                                <div class="input-group mt-3">
+                                    <div class="input-group ">
+                                        <input type="text" class="form-control"
+                                               style="border-bottom-right-radius: 0 !important; border-top-right-radius: 0 !important;"
+                                               placeholder="Ваш комментарий" aria-label="Имя пользователя получателя"
+                                               aria-describedby="button-addon2">
+                                        <button class="btn btn-outline-secondary m-0" type="button" id="button-addon2">
+                                            Отправить
+                                        </button>
                                     </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                        <p class="text-xs text-secondary mb-0">коментарий вапавпвап пвап вапвап вап вап
-                                            вапвап вап вапвапвапвапва вапвапвапвапвап вапвапвап а авпавпап ап авп
-                                            вапавпвапва пвап вап вап</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                        <p class="text-xs text-secondary mb-0">коментарий вапавпвап пвап вапвап вап вап
-                                            вапвап вап вапвапвапвапва вапвапвапвапвап вапвапвап а авпавпап ап авп
-                                            вапавпвапва пвап вап вап</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                        <p class="text-xs text-secondary mb-0">коментарий вапавпвап пвап вапвап вап вап
-                                            вапвап вап вапвапвапвапва вапвапвапвапвап вапвапвап а авпавпап ап авп
-                                            вапавпвапва пвап вап вап</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                        <p class="text-xs text-secondary mb-0">коментарий вапавпвап пвап вапвап вап вап
-                                            вапвап вап вапвапвапвапва вапвапвапвапвап вапвапвап а авпавпап ап авп
-                                            вапавпвапва пвап вап вап</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                        <p class="text-xs text-secondary mb-0">коментарий вапавпвап пвап вапвап вап вап
-                                            вапвап вап вапвапвапвапва вапвапвапвапвап вапвапвап а авпавпап ап авп
-                                            вапавпвапва пвап вап вап</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                        <p class="text-xs text-secondary mb-0">коментарий вапавпвап пвап вапвап вап вап
-                                            вапвап вап вапвапвапвапва вапвапвапвапвап вапвапвап а авпавпап ап авп
-                                            вапавпвапва пвап вап вап</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mt-3">
-                                <div class="input-group ">
-                                    <input type="text" class="form-control"
-                                           style="border-bottom-right-radius: 0 !important; border-top-right-radius: 0 !important;"
-                                           placeholder="Ваш комментарий" aria-label="Имя пользователя получателя"
-                                           aria-describedby="button-addon2">
-                                    <button class="btn btn-outline-secondary m-0" type="button" id="button-addon2">
-                                        Отправить
-                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header">title</div>
-                        <div class="card-body">Описание</div>
                     </div>
                 </div>
             </div>

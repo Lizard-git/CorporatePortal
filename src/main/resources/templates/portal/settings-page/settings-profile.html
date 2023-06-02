@@ -46,7 +46,7 @@
                 <div class="card mt-3 mb-3">
                     <div class="card-header"><h6 class="mb-0 pb-0">Данные пользователя</h6></div>
                     <div class="card-body mt-0 pt-0">
-                        <form method="post" th:action="'/users/change/data/' + ${DataUser.getId()}" th:object="${DataUser}">
+                        <form method="post" th:action="'/users/change/data'" th:object="${User}">
                             <div class="row">
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group">

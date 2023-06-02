@@ -42,28 +42,13 @@
         <div th:replace="~{/portal/fragments/setting-header-fragment.html::setting_header('security')}"></div>
         <div class="row">
             <div class="col">
-                <div class="card mt-3 mb-3">
-                    <div class="card-header">
-                        <h6 class="mb-0 pb-0">Авторизационные данные пользователя</h6>
-                        <div class="alert alert-info text-white" role="alert">
-                            <p>Если вы хотите изменить только свой логин, то оставьте пустыми поля: "Старый пароль", "Новый пароль", "Повторите новый пароль".</p>
-                            <p>Если вы хотите изменить пароль, помниете о следующих правилах:</p>
-                            <ul>
-                                <li>Пароль должен быть более 6 символов</li>
-                                <li>Пароль должен содержать цифры, прописные и строчные буквы</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card-body mt-0 pt-0">
-                        <form method="post" th:action="'/users/change/' + ${User.getId()}" th:object="${AuthData}">
-                            <div class="form-group">
-                                <label for="login-input">Логин</label>
-                                <input type="text" class="form-control" id="login-input" placeholder="OrlovAE" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" th:field="*{login}">
-                                <small class="form-text text-danger" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Ошибка</small>
-                            </div>
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" th:action="'/users/change/auth/data'" th:object="${AuthData}">
                             <div class="form-group">
                                 <label for="old-password">Старый пароль</label>
                                 <input type="password" class="form-control" id="old-password" placeholder="******" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" th:field="*{oldPassword}">
+                                <small class="form-text text-danger" th:if="${#fields.hasErrors('oldPassword')}" th:errors="*{oldPassword}">Ошибка</small>
                             </div>
                             <div class="form-group">
                                 <label for="new-password">Новый пароль</label>

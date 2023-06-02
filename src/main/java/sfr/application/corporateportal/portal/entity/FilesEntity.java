@@ -18,7 +18,7 @@ public class FilesEntity {
     @Column(name = "id")
     private Long id;
 
-    @Size(max = 100, min = 2, message = "Имя должно быть от 2 до 100 символов")
+    @Size(max = 100, message = "Имя должно быть от 2 до 100 символов")
     @NotEmpty(message = "Имя не может быть пустым")
     @Column(name = "tagName", nullable = false, length = 100)
     private String tagName;

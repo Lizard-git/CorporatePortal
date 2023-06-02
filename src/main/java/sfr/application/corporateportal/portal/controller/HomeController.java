@@ -25,7 +25,7 @@ public class HomeController {
         model.addAttribute("User", user);
 
         //Получение всех пользователей из отдела авторизированного пользователя кроме себя
-        DepartmentsEntity department = user.getData().getDepartments();
+        DepartmentsEntity department = user.getDepartments();
         List<UsersEntity> users = usersService.getAllByDepartment(department);
         users = users.stream().filter(usersEntity -> !usersEntity.getId().equals(user.getId())).collect(Collectors.toList());
         model.addAttribute("Users", users);

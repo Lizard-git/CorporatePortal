@@ -1,0 +1,153 @@
+<!--
+=========================================================
+* Soft UI Dashboard - v1.0.7
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/portal/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/portal/img/favicon.png}">
+    <title>Авторизация</title>
+    <!--     Fonts and icons     -->
+    <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />-->
+    <!-- Nucleo Icons -->
+    <link th:href="@{/portal/css/nucleo-icons.css}" rel="stylesheet"/>
+    <link th:href="@{/portal/css/nucleo-svg.css}" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <!--  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>-->
+    <!--  <link th:href="@{/css/nucleo-svg.css}" href="/resources/static/css/" rel="stylesheet" />-->
+    <!-- CSS Files -->
+    <link th:href="@{/portal/css/soft-ui-dashboard.css}" id="pagestyle" rel="stylesheet"/>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+<aside th:replace="~{/portal/fragments/sidebar-fragment.html::sidebar('/files')}"></aside>
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <nav th:replace="~{/portal/fragments/header-fragment.html::header('Профиль пользователя')}"></nav>
+    <div class="container-fluid py-4">
+        <div class="card">
+            <div class="card-body d-flex justify-content-end">
+                <button type="button" class="btn btn-primary m-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Добавить файл
+                </button>
+                <!-- Модальное окно -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Добавление нового файла</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" th:action="@{/resources/add}" enctype="multipart/form-data">
+                                    <div class="form-group d-flex flex-column">
+                                        <label for="title" class="marker-important">Документ (До 20Мб)</label>
+                                        <input type="file" id="title" name="file" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-position-input" class="marker-important">Статус</label>
+                                        <select class="form-select" id="new-position-input" name="status">
+                                            <option th:each="status : ${AllStatus}" th:value="${status.getId()}" th:text="${status.getDescription()}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="btn-end d-flex justify-content-end">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                        <button type="submit" class="btn btn-primary">Добавить</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="table-responsive p-0">
+                    <table id="table1" class="table table-striped align-items-center mb-0"
+                           data-sticky-header="true" data-sticky-header-offset-y="60">
+                        <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Файл
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Кто добавил
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Статус
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Загрузка
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="file:${AllFiles}">
+                            <th>
+                                <div class="container-col d-flex align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                        <polyline points="13 2 13 9 20 9"></polyline>
+                                    </svg>
+                                    <p class="m-0" th:text="${file.getTagName()}"></p>
+                                </div>
+                            </th>
+                            <td th:text="${file.getUserAdd().getSurname() + ' ' + file.getUserAdd().getName() + ' ' + file.getUserAdd().getMiddleName()}"></td>
+                            <td th:text="${file.getStatus().getDescription()}"></td>
+                            <td class="d-flex justify-content-center"><a class="btn btn-outline-success p-2 m-0" th:href="${file.getUrlImg()}">Загрузить</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid py-4">
+        <footer class="footer pt-3  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                        <div class="copyright text-center text-sm text-muted text-lg-start">
+                            © Alex Orl
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</main>
+<!--   Core JS Files   -->
+<script src="/portal/js/core/popper.min.js"></script>
+<script src="/portal/js/core/bootstrap.min.js"></script>
+<script src="/portal/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="/portal/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="/portal/js/plugins/chartjs.min.js"></script>
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
+<script src="/portal/js/soft-ui-dashboard.js"></script>
+</body>
+
+</html>

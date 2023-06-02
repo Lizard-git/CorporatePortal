@@ -1,12 +1,16 @@
 package sfr.application.corporateportal.portal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +34,8 @@ public class UsersEntity {
     private String login;
 
     //Пароль пользователя (для входа)
-    @Size(max = 50, min = 5, message = "Значение пароля должно быть от 5 до 50 символов")
+    @JsonIgnore
+    @Size(max = 100, min = 5, message = "Значение пароля должно быть от 5 до 100 символов")
     @NotEmpty(message = "Пароль не может быть пустым")
     @Column(name = "password", nullable = false, length = 100)
     private String password;
@@ -65,22 +70,100 @@ public class UsersEntity {
     @Column(name = "isEnabled")
     private Boolean isEnabled;
 
-    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "dataUser", nullable = false)
-    private DataUsersEntity data;
+//    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "dataUser", nullable = false)
+//    private DataUsersEntity data;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    //Фамилия
+    @Size(max = 100, min = 2, message = "Фамилии должна быть от 2 до 100 символов")
+    @NotEmpty(message = "Фамилия не может быть пустым")
+    @Column(name = "surname", nullable = false, length = 100)
+    private String surname;
+
+    //Имя
+    @Size(max = 100, min = 2, message = "Имя должно быть от 2 до 100 символов")
+    @NotEmpty(message = "Имя не может быть пустым")
+    @Column(name = "name", nullable = false, length = 100)
+    private String name;
+
+    //Отчество
+    @Size(max = 100, message = "Отчество должно быть до 100 символов")
+    @Column(name = "middleName", length = 100)
+    private String middleName;
+
+    //Адрес
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idAddress")
+    private AddressEntity address;
+
+    //IP телефон
+    @Column(name = "ipPhone", length = 100)
+    private String ipPhone;
+
+    //Телефон
+    @Column(name = "phone", length = 100)
+    private String phone;
+
+    //Мобильный телефон
+    @Column(name = "mobilePhone", length = 100)
+    private String mobilePhone;
+
+    //Рабочий Email
+    @Email(message = "Неверно введен Email")
+    @Column(name = "workEmail", length = 100)
+    private String workEmail;
+
+    //Домашний Email
+    @Email(message = "Неверно введен Email")
+    @Column(name = "homeEmail", length = 100)
+    private String homeEmail;
+
+
+    //Удалить при следующей генерации
+    //Опыт сотрудника (стаж)
+    @Column(name = "dateExperience")
+    @CreatedDate
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDateTime dateExperience;
+
+    //Дата рождения
+    @Column(name = "dateBirthday")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateBirthday;
+
+    //Номер кабинета
+    @Column(name = "cabinetNumber", length = 50)
+    private String cabinetNumber;
+
+    //ip адресс рабочего компьютера
+    @Column(name = "ipAddressPC", length = 50)
+    private String ipAddressPC;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idDdepartments")
+    private DepartmentsEntity departments;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "position")
+    private PositionEntity position;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<NewsEntity> news;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<ChatsEntity> chats;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<ChatUsersEntity> chatsUsers;
 
-    @OneToMany(mappedBy = "userAdd", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    @OneToMany(mappedBy = "userAdd", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<FilesEntity> files;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Users_Roles",

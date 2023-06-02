@@ -9,6 +9,7 @@ import sfr.application.corporateportal.portal.entity.UsersEntity;
 import sfr.application.corporateportal.portal.repository.CommentRepository;
 import sfr.application.corporateportal.portal.repository.NewsRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,6 +35,8 @@ public class NewsService {
     public void create(NewsEntity news, UsersEntity actionUser) {
         if (!ObjectUtils.isEmpty(news)) {
             try {
+                news.setUser(actionUser);
+                news.setCreationDate(new Date());
                 newsRepository.save(news);
                 log.info("Add new news!");
                 historyService.addNewHistory("Добавил новость: " + news.getTitle(), actionUser);

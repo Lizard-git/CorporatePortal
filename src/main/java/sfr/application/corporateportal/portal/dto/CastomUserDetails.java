@@ -3,6 +3,7 @@ package sfr.application.corporateportal.portal.dto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.ObjectUtils;
 import sfr.application.corporateportal.portal.entity.RolesEntity;
 import sfr.application.corporateportal.portal.entity.UsersEntity;
 
@@ -25,6 +26,8 @@ public class CastomUserDetails implements UserDetails {
 
     private Boolean isEnabled;
 
+    private Boolean deleted;
+
     public CastomUserDetails(UsersEntity user) {
         this.login = user.getLogin();
         this.password=user.getPassword();
@@ -33,6 +36,7 @@ public class CastomUserDetails implements UserDetails {
         this.isAccountNonLocked = user.getIsAccountNonLocked();
         this.isCredentialsNonExpired = user.getIsCredentialsNonExpired();
         this.isEnabled = user.getIsEnabled();
+        this.deleted = ObjectUtils.isEmpty(user.getDeleteDate());
     }
 
     private Collection<? extends GrantedAuthority> mapRoleToAuthorities(Collection<RolesEntity> role) {
@@ -75,6 +79,6 @@ public class CastomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return this.isEnabled;
+        return this.deleted;
     }
 }

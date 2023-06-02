@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sfr.application.corporateportal.portal.dto.input_entity_dto.AuthDataDTO;
 import sfr.application.corporateportal.portal.dto.input_entity_dto.CreateUserDTO;
-import sfr.application.corporateportal.portal.entity.AuthorityEntity;
-import sfr.application.corporateportal.portal.entity.RolesEntity;
-import sfr.application.corporateportal.portal.entity.UsersEntity;
+import sfr.application.corporateportal.portal.entity.*;
 import sfr.application.corporateportal.portal.service.*;
 
 @Controller
@@ -30,7 +28,7 @@ public class SettingsController {
         // Данные авторизированного пользователя
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UsersEntity user = usersService.findByUserLogin(auth.getName());
-        model.addAttribute("DataUser", user.getData());
+        model.addAttribute("User", usersService.convertUserInDataUser(user));
         // -------------------------------------
 
         // Адреса
@@ -113,7 +111,9 @@ public class SettingsController {
         model.addAttribute("NewAuthority", new AuthorityEntity());
         // -------------------------------------
 
+        model.addAttribute("NewNews", new NewsEntity());
 
+        model.addAttribute("NewApp", new ApplicationsEntity());
 
         return "portal/settings-page/settings-administrator";
     }

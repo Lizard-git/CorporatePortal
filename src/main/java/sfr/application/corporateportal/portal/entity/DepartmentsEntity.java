@@ -1,5 +1,6 @@
 package sfr.application.corporateportal.portal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -37,6 +38,7 @@ public class DepartmentsEntity {
     @Column(name = "description", length = 512, nullable = false)
     private String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "departments")
-    private List<DataUsersEntity> users;
+    private List<UsersEntity> users;
 }

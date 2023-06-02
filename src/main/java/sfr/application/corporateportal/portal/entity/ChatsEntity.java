@@ -36,6 +36,6 @@ public class ChatsEntity {
     @Column(name = "URLImg", length = 1500)
     private String urlImg;
 
-    @OneToMany(mappedBy = "chat")
+    @OneToMany(mappedBy = "chat", fetch = FetchType.EAGER)
     private List<ChatUsersEntity> usersInChat;
 }

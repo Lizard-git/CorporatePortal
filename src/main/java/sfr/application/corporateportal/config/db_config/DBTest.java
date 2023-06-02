@@ -71,6 +71,10 @@ public class DBTest {
             @Qualifier(DATA_SOURCE) DataSource dataSource
     ) {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        HibernateJpaVendorAdapter a = new HibernateJpaVendorAdapter();
+        a.setGenerateDdl(false);//менять на true при генерации
+        a.setShowSql(true);
+
         em.setDataSource(dataSource);
         em.setPersistenceUnitName(ENTITY_MANAGER_FACTORY);
         em.setPackagesToScan(ENTITY_PACKAGE);
@@ -85,7 +89,7 @@ public class DBTest {
         //create-drop - Схема базы данных будет удалена и создана позже. После закрытия SessionFactory схема базы данных будет удалена.
         //validate - Схема базы данных будет проверена с использованием сопоставлений сущностей.
         //update - Схема базы данных будет обновлена путем сравнения существующей схемы базы данных с сопоставлениями сущностей.
-        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.hbm2ddl.auto", "none");
         //DB2 - org.hibernate.dialect.DB2Dialect
         //MySQL - org.hibernate.dialect.MySQLDialect
         //PostgreSQL - org.hibernate.dialect.PostgreSQLDialect
