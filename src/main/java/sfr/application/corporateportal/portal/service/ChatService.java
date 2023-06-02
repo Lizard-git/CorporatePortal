@@ -5,9 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import sfr.application.corporateportal.portal.entity.ChatUsersEntity;
 import sfr.application.corporateportal.portal.entity.ChatsEntity;
+import sfr.application.corporateportal.portal.entity.MessagesEntity;
 import sfr.application.corporateportal.portal.entity.UsersEntity;
 import sfr.application.corporateportal.portal.repository.ChatRepository;
 import sfr.application.corporateportal.portal.repository.ChatUserRepository;
+import sfr.application.corporateportal.portal.repository.MessageRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +22,11 @@ public class ChatService {
     private final ChatRepository chatRepository;
     private final ChatUserRepository chatUserRepository;
     private final HistoryService historyService;
+    private final MessageRepository messageRepository;
+
+    public ChatsEntity getChatById(Long id) {
+        return chatRepository.findById(id).get();
+    }
 
     public List<ChatsEntity> getAllChatForUser(UsersEntity user) {
         List<ChatUsersEntity> chatsAndUser = chatUserRepository.getAllByUser(user);
@@ -67,5 +74,31 @@ public class ChatService {
             }
         }
         return result;
+    }
+
+    public List<MessagesEntity> getAllMessageByChat(ChatsEntity chat) {
+        return messageRepository.getAllByChat(chat);
+    }
+
+    public void newMessage(MessagesEntity messages) {
+        messageRepository.save(messages);
+    }
+
+    public Long getIdChat(UsersEntity userOne, UsersEntity userTwo) {
+        List<ChatsEntity> chats = getAllChatForUser(userOne);
+        List<ChatsEntity> filterChatsForTwoUser = chats.stream().filter(chat -> chat.getUsersInChat().size() == 2).toList();
+        for (var chat: filterChatsForTwoUser) {
+            if (chat.getUsersInChat().get(0).getUser().getId() == userOne.getId()) {
+                if (chat.getUsersInChat().get(1).getUser().getId() == userTwo.getId()) {
+                    return chat.getId();
+                }
+            }
+            if (chat.getUsersInChat().get(0).getUser().getId() == userTwo.getId()) {
+                if (chat.getUsersInChat().get(1).getUser().getId() == userOne.getId()) {
+                    return chat.getId();
+                }
+            }
+        }
+        return null;
     }
 }

@@ -47,7 +47,10 @@
                     </div>
                     <div class="card-body pt-0">
                         <ul class="list-group overflow-y-scroll h-100 max-height-vh-70">
-                            <li th:each="chat: ${Chats}" class="list-group-item list-group-item-action" th:text="${chat.getName().equals('Default') ? 'd' : chat.getName() }"></li>
+                            <a th:each="chat: ${Chats}" th:href="'/messenger/get/chat/' + ${chat.getId()}">
+                                <li th:if="${chat.getUsersInChat().get(0).getUser().getId() == User.getId()}" th:text="${chat.getName().equals('Default') ? chat.getUsersInChat().get(1).getUser().getSurname() : chat.getName()}" class="list-group-item list-group-item-action"></li>
+                                <li th:if="${chat.getUsersInChat().get(1).getUser().getId() == User.getId()}" th:text="${chat.getName().equals('Default') ? chat.getUsersInChat().get(0).getUser().getSurname() : chat.getName()}" class="list-group-item list-group-item-action"></li>
+                            </a>
                         </ul>
                     </div>
                 </div>
@@ -56,17 +59,23 @@
             </div>
             <div class="col-7 col-md-9 col-xl-8">
                 <div class="flex-column overflow-y-scroll max-height-vh-70 h-100 rounded mb-4" style="background-color: #fff" id="historyChat">
-                    <div class="row flex-column m-3 p-0">
-                        <div class="col-12 alert alert-secondary text-white">message</div>
-                        <div class="col-12 alert alert-info d-flex justify-content-end text-white">message</div>
+                    <div th:if="${Messages.size() != 0}" th:each="message:${Messages}" class="row flex-column m-3 p-0">
+                        <div th:if="${!message.getUser().getId().equals(User.getId())}" th:text="${message.getMessage()}" class="col-12 alert alert-secondary text-white"></div>
+                        <div th:if="${message.getUser().getId().equals(User.getId())}" th:text="${message.getMessage()}" class="col-12 alert alert-info d-flex justify-content-end text-white"></div>
                     </div>
                 </div>
                     <div class="form-control">
-                        <form>
+                        <form th:if="${Chat.getId() != null}" method="post" th:action="'/messenger/new/message/' + ${Chat.getId()}">
                             <div class="input-group">
-                                <input class="form-control" name="message" type="text"><button class="btn btn-outline-success m-0">Отправить</button>
+                                <input class="form-control" name="message" type="text">
+                                <button type="submit" class="btn btn-outline-success m-0">Отправить</button>
                             </div>
-
+                        </form>
+                        <form th:if="${Chat.getId() == null}">
+                            <div class="input-group">
+                                <input class="form-control" name="message" type="text">
+                                <button type="submit" class="btn btn-outline-success m-0">Отправить</button>
+                            </div>
                         </form>
                     </div>
             </div>

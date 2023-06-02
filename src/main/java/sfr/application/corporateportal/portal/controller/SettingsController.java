@@ -21,7 +21,7 @@ public class SettingsController {
     private final PositionService positionService;
     private final AddressService addressService;
     private final UsersService usersService;
-
+    private final ApplicationService applicationService;
     //-----------------------------------------------Настройка профиля-----------------------------------------------//
     @GetMapping(path = {"", "/profile"})
     public String ProfilePage(Model model) {
@@ -114,6 +114,8 @@ public class SettingsController {
         model.addAttribute("NewNews", new NewsEntity());
 
         model.addAttribute("NewApp", new ApplicationsEntity());
+
+        model.addAttribute("AllStatus", applicationService.getAllStatusApp());
 
         return "portal/settings-page/settings-administrator";
     }

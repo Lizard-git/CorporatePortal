@@ -41,26 +41,13 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12 col-md-4 col-xl-3 pb-4">
-                <a class="card h-100 mb-3" href="#">
+                <a th:each="app:${AllApp}" class="card h-100 mb-3" th:href="${app.getUrl()}">
                     <div class="card-header d-flex justify-content-between">
-                        <h5>Name</h5>
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                        <h5 th:text="${app.getName()}"></h5>
+                        <p th:text="${app.getStatus().getName()}"></p>
+<!--                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">-->
                     </div>
-                    <div class="card-body">
-                        description
-                        sdf
-                        sdf
-                        sdf
-                        <br>
-                        ddddddddddddddddddddddd
-                        dddddddddddddddddddddddddddddddddddd
-                        dddddddddddddd
-                        ddddddddddd
-                        dddddddddd
-                        ddd
-                        <br>
-                        d
-                    </div>
+                    <div th:text="${app.getDescription()}" class="card-body"></div>
                 </a>
             </div>
         </div>

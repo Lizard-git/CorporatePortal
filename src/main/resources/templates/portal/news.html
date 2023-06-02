@@ -51,33 +51,33 @@
                             <h4 th:text="${news.getTitle()}"></h4>
                             <p th:text="${news.getText()}"></p>
                         </div>
-                        <div th:if="${User} != null" class="card-footer">
-                            <h6>Все комментарии: </h6>
-                            <div class="max-height-200 overflow-auto">
-                                <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">John Michael</h6>
-                                        <p class="text-xs text-secondary mb-0">коментарий вапавпвап пвап вапвап вап вап
-                                            вапвап вап вапвапвапвапва вапвапвапвапвап вапвапвап а авпавпап ап авп
-                                            вапавпвапва пвап вап вап</p>
-                                    </div>
-                                </div>
-                                <div class="input-group mt-3">
-                                    <div class="input-group ">
-                                        <input type="text" class="form-control"
-                                               style="border-bottom-right-radius: 0 !important; border-top-right-radius: 0 !important;"
-                                               placeholder="Ваш комментарий" aria-label="Имя пользователя получателя"
-                                               aria-describedby="button-addon2">
-                                        <button class="btn btn-outline-secondary m-0" type="button" id="button-addon2">
-                                            Отправить
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div th:if="${User} != null" class="card-footer">-->
+<!--                            <h6>Все комментарии: </h6>-->
+<!--                            <div class="max-height-200 overflow-auto">-->
+<!--                                <div class="d-flex px-2 py-1">-->
+<!--                                    <div>-->
+<!--                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">-->
+<!--                                    </div>-->
+<!--                                    <div class="d-flex flex-column justify-content-center">-->
+<!--                                        <h6 class="mb-0 text-sm">John Michael</h6>-->
+<!--                                        <p class="text-xs text-secondary mb-0">коментарий вапавпвап пвап вапвап вап вап-->
+<!--                                            вапвап вап вапвапвапвапва вапвапвапвапвап вапвапвап а авпавпап ап авп-->
+<!--                                            вапавпвапва пвап вап вап</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="input-group mt-3">-->
+<!--                                    <div class="input-group ">-->
+<!--                                        <input type="text" class="form-control"-->
+<!--                                               style="border-bottom-right-radius: 0 !important; border-top-right-radius: 0 !important;"-->
+<!--                                               placeholder="Ваш комментарий" aria-label="Имя пользователя получателя"-->
+<!--                                               aria-describedby="button-addon2">-->
+<!--                                        <button class="btn btn-outline-secondary m-0" type="button" id="button-addon2">-->
+<!--                                            Отправить-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>
