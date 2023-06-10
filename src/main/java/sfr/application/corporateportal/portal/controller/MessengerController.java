@@ -23,6 +23,7 @@ public class MessengerController {
     private final UsersService usersService;
     private final ChatService chatService;
 
+    //----------------------------------------------Страница с чатом--------------------------------------------------//
     @GetMapping("")
     public String HomePage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -33,7 +34,9 @@ public class MessengerController {
         model.addAttribute("Messages", new ArrayList<MessagesEntity>());
         return "portal/messenger";
     }
+    //---------------------------------------------Страница с чатом конец---------------------------------------------//
 
+    //--------------------------------------------Новый чат с пользователем-------------------------------------------//
     @GetMapping("/new/{id}")
     public String NewChat(@PathVariable Long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -47,7 +50,9 @@ public class MessengerController {
         }
         return "redirect:/messenger";
     }
+    //-----------------------------------------Новый чат с пользователем конец----------------------------------------//
 
+    //------------------------------------Получение сообщений в конкретном чате---------------------------------------//
     @GetMapping("/get/chat/{id}")
     public String getMessage(@PathVariable Long id, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -60,7 +65,9 @@ public class MessengerController {
         model.addAttribute("Messages", messages);
         return "portal/messenger";
     }
+    //----------------------------------Получение сообщений в конкретном чате конец-----------------------------------//
 
+    //----------------------------------------------Отправка сообщеия-------------------------------------------------//
     @PostMapping("/new/message/{id}")
     public String NewMessage(@PathVariable Long id, @RequestParam("message") String message) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -74,4 +81,5 @@ public class MessengerController {
         chatService.newMessage(newMessage);
         return "redirect:/messenger/get/chat/" + id;
     }
+    //------------------------------------------Отправка сообщеия конец-----------------------------------------------//
 }

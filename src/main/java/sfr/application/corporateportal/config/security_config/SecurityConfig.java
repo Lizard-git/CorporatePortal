@@ -56,9 +56,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        //.failureForwardUrl("/login")
                         .defaultSuccessUrl("/home", true)
-                        //.successForwardUrl("/home")
                 )
                 .build();
     }

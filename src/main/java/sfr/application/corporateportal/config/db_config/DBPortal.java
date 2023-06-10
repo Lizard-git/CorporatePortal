@@ -75,10 +75,10 @@ public class DBPortal {
             @Qualifier(DATA_SOURCE) DataSource dataSource
     ) {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-
         HibernateJpaVendorAdapter a = new HibernateJpaVendorAdapter();
         a.setGenerateDdl(false);//менять на true при генерации
         a.setShowSql(true);
+
         em.setDataSource(dataSource);
         em.setPersistenceUnitName(ENTITY_MANAGER_FACTORY);
         em.setPackagesToScan(ENTITY_PACKAGE);

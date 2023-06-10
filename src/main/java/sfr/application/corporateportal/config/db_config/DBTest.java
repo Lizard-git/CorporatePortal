@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 
 /**
+ * Сайт с информацией
+ * https://struchkov.dev/blog/ru/multiple-databases-spring-boot/
  * Чтобы работать с двумя базами нужно создать для каждой БД свой EntityManagerFactory и TransactionManager.
  * А также указать, какие JPA репозитории и Entity относятся к этой БД.
  * /-------------------------------------------------------------------------------------------------------------------/
@@ -81,7 +83,7 @@ public class DBTest {
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         final HashMap<String, Object> properties = new HashMap<>();
-        properties.put("jakarta.persistence.validation.mode", "none");
+        //properties.put("jakarta.persistence.validation.mode", "none");
         //none - Никаких действий не выполняется. Схема не будет создана.
         //create-only - Будет создана схема базы данных.
         //drop - Схема базы данных будет удалена.
