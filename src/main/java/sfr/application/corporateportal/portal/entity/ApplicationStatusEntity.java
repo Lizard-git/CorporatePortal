@@ -24,4 +24,7 @@ public class ApplicationStatusEntity {
     @UniqueElements(message = "Такое имя статуса уже сущесвует в системе")
     @Column(name = "statusName" , nullable = false, unique = true, length = 50)
     private String name;
+
+    @Column(name = "description")
+    private String description;
 }

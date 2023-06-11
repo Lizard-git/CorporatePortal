@@ -31,11 +31,11 @@ public class ApplicationsEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "urlImg")
+    @Column(name = "urlImage")
     private String img;
 
-    @Column(name = "urlDocument")
-    private String document;
+    @Column(name = "urlInstruction")
+    private String instruction;
 
     @ManyToOne
     @JoinColumn(name = "idStatus")
@@ -48,5 +48,5 @@ public class ApplicationsEntity {
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_1_AUTHORITY_APPLICATION"))},
             schema = "dashboard"
     )
-    private List<RolesEntity> authority;
+    private List<AuthorityEntity> authority;
 }

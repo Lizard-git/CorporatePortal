@@ -34,12 +34,12 @@ import java.util.HashMap;
  */
 
 @EnableJpaRepositories(
-        entityManagerFactoryRef = DBTest.ENTITY_MANAGER_FACTORY,
-        transactionManagerRef = DBTest.TRANSACTION_MANAGER,
-        basePackages = DBTest.JPA_REPOSITORY_PACKAGE
+        entityManagerFactoryRef = DBAppMSZ.ENTITY_MANAGER_FACTORY,
+        transactionManagerRef = DBAppMSZ.TRANSACTION_MANAGER,
+        basePackages = DBAppMSZ.JPA_REPOSITORY_PACKAGE
 )
 @Configuration
-public class DBTest {
+public class DBAppMSZ {
     public static final String PROPERTY_PREFIX = "app.msz.datasource";
     public static final String JPA_REPOSITORY_PACKAGE = "sfr.application.corporateportal.msz.repository";
     public static final String ENTITY_PACKAGE = "sfr.application.corporateportal.msz.entity";

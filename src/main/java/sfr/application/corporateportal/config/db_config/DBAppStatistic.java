@@ -1,6 +1,6 @@
 package sfr.application.corporateportal.config.db_config;
 
-import jakarta.persistence.ValidationMode;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -18,7 +18,6 @@ import java.util.HashMap;
 /**
  * Сайт с информацией
  * https://struchkov.dev/blog/ru/multiple-databases-spring-boot/
- * /-------------------------------------------------------------------------------------------------------------------/
  * Чтобы работать с двумя базами нужно создать для каждой БД свой EntityManagerFactory и TransactionManager.
  * А также указать, какие JPA репозитории и Entity относятся к этой БД.
  * /-------------------------------------------------------------------------------------------------------------------/
@@ -36,19 +35,19 @@ import java.util.HashMap;
  */
 
 @EnableJpaRepositories(
-        entityManagerFactoryRef = DBPortal.ENTITY_MANAGER_FACTORY,
-        transactionManagerRef = DBPortal.TRANSACTION_MANAGER,
-        basePackages = DBPortal.JPA_REPOSITORY_PACKAGE
+        entityManagerFactoryRef = DBAppMSZ.ENTITY_MANAGER_FACTORY,
+        transactionManagerRef = DBAppMSZ.TRANSACTION_MANAGER,
+        basePackages = DBAppMSZ.JPA_REPOSITORY_PACKAGE
 )
 @Configuration
-public class DBPortal {
-    public static final String PROPERTY_PREFIX = "app.portal.datasource";
-    public static final String JPA_REPOSITORY_PACKAGE = "sfr.application.corporateportal.portal.repository";
-    public static final String ENTITY_PACKAGE = "sfr.application.corporateportal.portal.entity";
-    public static final String ENTITY_MANAGER_FACTORY = "portalEntityManagerFactory";
-    public static final String DATA_SOURCE = "portalDataSource";
-    public static final String DATABASE_PROPERTY = "portalDatabaseProperty";
-    public static final String TRANSACTION_MANAGER = "portalTransactionManager";
+public class DBAppStatistic {
+    public static final String PROPERTY_PREFIX = "app.statistic.datasource";
+    public static final String JPA_REPOSITORY_PACKAGE = "sfr.application.corporateportal.statistic.repository";
+    public static final String ENTITY_PACKAGE = "sfr.application.corporateportal.statistic.entity";
+    public static final String ENTITY_MANAGER_FACTORY = "statisticEntityManagerFactory";
+    public static final String DATA_SOURCE = "statisticDataSource";
+    public static final String DATABASE_PROPERTY = "statisticDatabaseProperty";
+    public static final String TRANSACTION_MANAGER = "statisticTransactionManager";
 
 
     @Bean(DATABASE_PROPERTY)
@@ -82,10 +81,10 @@ public class DBPortal {
         em.setDataSource(dataSource);
         em.setPersistenceUnitName(ENTITY_MANAGER_FACTORY);
         em.setPackagesToScan(ENTITY_PACKAGE);
-        em.setJpaVendorAdapter(a);
-        em.setValidationMode(ValidationMode.CALLBACK);
+        em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+
         final HashMap<String, Object> properties = new HashMap<>();
-        //properties.put("jakarta.persistence.validation.mode", "CALLBACK");
+        //properties.put("jakarta.persistence.validation.mode", "none");
         //none - Никаких действий не выполняется. Схема не будет создана.
         //create-only - Будет создана схема базы данных.
         //drop - Схема базы данных будет удалена.

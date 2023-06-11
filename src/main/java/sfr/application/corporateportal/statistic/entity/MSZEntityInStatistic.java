@@ -1,4 +1,4 @@
-package sfr.application.corporateportal.msz.entity;
+package sfr.application.corporateportal.statistic.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,8 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Test", schema = "test")
-public class TestEntity {
+@Table(name = "msz", schema = "msz")
+public class MSZEntityInStatistic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

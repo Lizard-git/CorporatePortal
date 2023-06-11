@@ -1,9 +1,9 @@
-package sfr.application.corporateportal.msz.service;
+package sfr.application.corporateportal.statistic.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import sfr.application.corporateportal.msz.entity.MSZEntity;
-import sfr.application.corporateportal.msz.repository.TestRepository;
+import sfr.application.corporateportal.statistic.entity.MSZEntityInStatistic;
+import sfr.application.corporateportal.statistic.repository.TestRepository;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class TestService {
     private final TestRepository testRepository;
 
-    List<MSZEntity> testServiceMethod(String snils) {
+    List<MSZEntityInStatistic> testServiceMethod(String snils) {
         return testRepository.getBySnilsContaining(snils);
     }
 }
