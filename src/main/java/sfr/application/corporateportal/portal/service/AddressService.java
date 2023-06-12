@@ -13,7 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 public class AddressService {
     private final AddressRepository addressRepository;
-    private final HistoryService historyService;
+    //private final HistoryService historyService;
+
+    /**
+     * Метод получает все адреса из базы данных
+     * @return List<AddressEntity>
+     */
     public List<AddressEntity> getAllAddress() {
         return addressRepository.findAll();
     }

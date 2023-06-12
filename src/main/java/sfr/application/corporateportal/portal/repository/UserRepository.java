@@ -1,5 +1,7 @@
 package sfr.application.corporateportal.portal.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import sfr.application.corporateportal.portal.entity.DepartmentsEntity;
@@ -18,4 +20,6 @@ public interface UserRepository extends JpaRepository<UsersEntity, Long> {
     Optional<UsersEntity> findById(Long id);
 
     List<UsersEntity> findAllByDeleteDateNotNull();
+
+    Page<UsersEntity> findAllByDepartments(DepartmentsEntity departments, Pageable pageable);
 }

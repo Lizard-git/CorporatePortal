@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Application", schema = "dashboard")
+@Table(name = "Application", schema = "dashboard", uniqueConstraints = { @UniqueConstraint(name = "uk_nameApp", columnNames = "name")})
 public class ApplicationsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class ApplicationsEntity {
     private String description;
 
     @NotEmpty(message = "Имя приложения не должно быть пустым")
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @Column(name = "urlImage")

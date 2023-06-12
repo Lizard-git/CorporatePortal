@@ -31,9 +31,10 @@
     <!--  <link th:href="@{/css/nucleo-svg.css}" href="/resources/static/css/" rel="stylesheet" />-->
     <!-- CSS Files -->
     <link th:href="@{/portal/css/soft-ui-dashboard.css}" id="pagestyle" rel="stylesheet"/>
+    <link th:href="@{/portal/js/plugins/DataTables/DataTables-1.13.4/css/jquery.dataTables.min.css}" rel="stylesheet"/>
 </head>
 
-<body class="g-sidenav-show  bg-gray-100">
+<body id="test" class="g-sidenav-show  bg-gray-100">
 <aside th:replace="~{/portal/fragments/sidebar-fragment.html::sidebar('/')}"></aside>
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -58,7 +59,7 @@
                             Фамилия Имя Отчество
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
-                            <span th:text="${User.getDepartments().getName()}">Отдел рпоарл аор лаор лаопрлралопрлоарлоарлоар лаопролрлаорлоар паолрплаорлаорлоар алопрлоар оларлоа рлаоро</span>
+                            <span th:text="${User.getDepartments().getName()}">Отдел</span>
                             / <span th:text="${User.getPosition().getName()}">Должность</span>
                         </p>
                     </div>
@@ -66,106 +67,95 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-12 col-xl-6">
-                <div id="widthRowCard" class="row">
-                    <div class="col-12 mb-2">
-                        <div class="card">
-                            <div class="card-header pt-3 pb-0 pe-2">
-                                <h5 class="text-muted">Личные данные</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <ul class="list-group">
-                                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
-                                                    class="text-dark">Адрес:</strong> &nbsp;
-                                                <span th:if="${User.getAddress().getFrame() != null}"
-                                                      th:text="${User.getAddress().getCity() + ' ' + User.getAddress().getStreet() + ' ' + User.getAddress().getHouse() + ' ' + User.getAddress().getFrame()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
-                                                <span th:if="${User.getAddress().getFrame() == null}"
-                                                      th:text="${User.getAddress().getCity() + ' ' + User.getAddress().getStreet() + ' ' + User.getAddress().getHouse()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
-                                            </li>
-                                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
-                                                    class="text-dark">Городской номер:</strong> &nbsp;
-                                                <nobr th:text="${User.getPhone()}">+7 (7898) 34 - 45 - 45
-                                                </nobr>
-                                            </li>
-                                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
-                                                    class="text-dark">Сотовый:</strong> &nbsp;
-                                                <nobr th:text="${User.getMobilePhone()}">+7 (914) 999-99-99
-                                                </nobr>
-                                            </li>
-                                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
-                                                    class="text-dark">IP телефон:</strong> &nbsp;
-                                                <nobr th:text="${User.getIpPhone()}">1613</nobr>
-                                            </li>
-                                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
-                                                    class="text-dark">IP адрес компьютера:</strong> &nbsp;
-                                                <nobr th:text="${User.getIpAddressPC()}">10.85.5.4</nobr>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col">
-                                        <ul class="list-group">
-                                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
-                                                    class="text-dark">Рабочая почта:</strong> &nbsp;
-                                                <nobr th:text="${User.getWorkEmail()}">User@arm.gs.gov</nobr>
-                                            </li>
-                                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
-                                                    class="text-dark">Домашняя почта:</strong> &nbsp;
-                                                <nobr th:text="${User.getHomeEmail()}">user@mail.com</nobr>
-                                            </li>
-                                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
-                                                    class="text-dark">Стаж:</strong> &nbsp;
-                                                <nobr>3 года</nobr>
-                                            </li>
-                                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
-                                                    class="text-dark">Номер кабинета:</strong> &nbsp;
-                                                <nobr th:text="${User.getCabinetNumber()}">5</nobr>
-                                            </li>
-                                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
-                                                    class="text-dark">IP адрес компьютера:</strong> &nbsp;
-                                                <nobr th:text="${User.getIpAddressPC()}">10.85.5.4</nobr>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="container-fluid">
+        <div id="h-auto" class="row">
+            <div class="col-12 mt-4">
+                <div class="card h-100">
+                    <div class="card-header pt-3 pb-0 pe-2">
+                        <h5 class="text-muted">Личные данные</h5>
                     </div>
-                    <div class="col-12 mt-2">
-                        <div class="card max-height-500">
-                            <div class="card-header pt-3 pb-0 pe-2">
-                                <h5 class="text-muted">C вами в отделе</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                            class="text-dark">Адрес:</strong> &nbsp;
+                                        <span th:if="${User.getAddress().getFrame() != null}"
+                                              th:text="${User.getAddress().getCity() + ' ' + User.getAddress().getStreet() + ' ' + User.getAddress().getHouse() + ' ' + User.getAddress().getFrame()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
+                                        <span th:if="${User.getAddress().getFrame() == null}"
+                                              th:text="${User.getAddress().getCity() + ' ' + User.getAddress().getStreet() + ' ' + User.getAddress().getHouse()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
+                                    </li>
+                                    <li th:if="${User.getPhone() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                            class="text-dark">Городской номер:</strong> &nbsp;
+                                        <nobr th:text="${User.getPhone()}">+7 (7898) 34 - 45 - 45
+                                        </nobr>
+                                    </li>
+                                    <li th:if="${User.getMobilePhone() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                            class="text-dark">Сотовый:</strong> &nbsp;
+                                        <nobr th:text="${User.getMobilePhone()}">+7 (914) 999-99-99
+                                        </nobr>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="card-body overflow-auto">
-                                <div class="table-responsive">
-                                    <table class="table table-hover m-0">
-                                        <tbody>
-                                        <tr th:each="user: ${Users}" style="cursor: pointer" onclick="locationDocument(this)" th:href="'/users/get/' + ${user.getId()}">
-                                            <th></th>
-                                            <td class="w-100"
-                                                th:text="${user.getSurname() + ' ' + user.getName() + ' ' + user.getMiddleName()}"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="col-12 col-md-4">
+                                <ul class="list-group">
+                                    <li th:if="${User.getIpPhone() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                            class="text-dark">IP телефон:</strong> &nbsp;
+                                        <nobr th:text="${User.getIpPhone()}">1613</nobr>
+                                    </li>
+                                    <li th:if="${User.getIpAddressPC() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                            class="text-dark">IP адрес компьютера:</strong> &nbsp;
+                                        <nobr th:text="${User.getIpAddressPC()}">10.85.5.4</nobr>
+                                    </li>
+                                    <li th:if="${User.getWorkEmail() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                            class="text-dark">Рабочая почта:</strong> &nbsp;
+                                        <nobr th:text="${User.getWorkEmail()}">User@arm.gs.gov</nobr>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="card-footer">
-<!--                                <div th:replace="/portal/fragments/pagination.html::pagination(${Users}, '/users/')"></div>-->
+                            <div class="col-12 col-md-4">
+                                <ul class="list-group">
+
+                                    <li th:if="${User.getHomeEmail() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                            class="text-dark">Домашняя почта:</strong> &nbsp;
+                                        <nobr th:text="${User.getHomeEmail()}">user@mail.com</nobr>
+                                    </li>
+                                    <li th:if="${User.getCabinetNumber() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                            class="text-dark">Номер кабинета:</strong> &nbsp;
+                                        <nobr th:text="${User.getCabinetNumber()}">5</nobr>
+                                    </li>
+                                    <li th:if="${User.getIpAddressPC() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                            class="text-dark">IP адрес компьютера:</strong> &nbsp;
+                                        <nobr th:text="${User.getIpAddressPC()}">10.85.5.4</nobr>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-xl-6">
-                <div id="setHeight" class="card">
-                    <div class="card-header">
-                        <h5 class="text-muted">Ваши приложения</h5>
+            <div class="col-12 mt-4">
+                <div id="card-users" class="card h-100">
+                    <div class="card-header pt-3 pb-0 pe-2">
+                        <h5 class="text-muted">C вами в отделе</h5>
                     </div>
                     <div class="card-body overflow-auto">
-
+                        <div class="table-responsive">
+                            <table id="usersTable" class="w-100 table table-striped align-items-center m-0" data-sticky-header="true" data-sticky-header-offset-y="60">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Ф.И.О
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Должность
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -192,6 +182,8 @@
 <script src="/portal/js/plugins/smooth-scrollbar.min.js"></script>
 <script src="/portal/js/plugins/chartjs.min.js"></script>
 <script src="/portal/js/plugins/jquery.js"></script>
+<!--<script src="/portal/js/plugins/DataTables/datatables.min.js"></script>-->
+<script src="/portal/js/plugins/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script>
 <script>
     let win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -200,12 +192,53 @@
         }
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    function locationDocument(e) {
-        document.location = e.getAttribute('href');
-    }
+    // function locationDocument(e) {
+    //     document.location = e.getAttribute('href');
+    // }
+
+    $(document).ready(function () {
+        $('#usersTable').DataTable({
+            "pageLength": 4,
+            "lengthChange": false,
+
+            language: {
+                url: '/portal/ru.json'
+            },
+            'ajax': {
+                'contentType': 'application/json',
+                'url': '/api/v1/users/get/all/department',
+                'type': 'POST',
+                'dataSrc': function (json) {
+                    let data = json.map(function (d) {
+                        d.name = d.name + " " + d.surname + " " + d.middleName;
+                        return d;
+                    })
+                    return data;
+                }
+            },
+            columns : [{
+                data : 'name'
+            },  {
+                data : 'position.name'
+            }],
+            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                $(nRow).css( 'cursor', 'pointer' );
+                $(nRow).click(function(){
+                    window.location = '/users/get/' + aData.id;
+                    return false;
+                });
+                $(nRow).on("mousedown", function(e) {
+                    if (e.which === 2) {
+                        window.open('/users/get/' + aData.id) ;
+                        return false;
+                    }
+                });
+            }
+        });
+    });
+
 </script>
 <script src="/portal/js/soft-ui-dashboard.js"></script>
-<script src="/portal/js/script.js"></script>
 </body>
 
 </html>

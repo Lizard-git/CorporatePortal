@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/statistic")
-public class TestController {
+public class StatisticController {
     @GetMapping("")
     public String GetTestAppPage() {
         return "statistic/index";

@@ -2,6 +2,8 @@ package sfr.application.corporateportal.portal.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -25,6 +27,11 @@ public class UsersService {
     private final PasswordEncoder passwordEncoder;
     private final HistoryService historyService;
 
+    /**
+     * Вернет пользователя по его ID из базы данных
+     * @param id - ID пользователя
+     * @return UsersEntity
+     */
     public UsersEntity getById(Long id) {
         return userRepository.findById(id).get();
     }
@@ -66,12 +73,6 @@ public class UsersService {
         return user;
     }
 
-
-
-
-//    public DataUsersEntity getDataUserById(Long id) {
-//        return dataUserRepository.findById(id).get();
-//    }
     /**
      * Получает список всех не удаленных пользователей из БД
      * @return List<UsersEntity>
@@ -79,6 +80,7 @@ public class UsersService {
     public List<UsersEntity>getAllIsNotDeleted() {
         return userRepository.findAllByDeleteDateNotNull();
     }
+
     /**
      * Получает список всех пользователей из БД
      * @return List<UsersEntity>
@@ -100,15 +102,23 @@ public class UsersService {
         }
     }
 
-
-
     /**
-     * Метод получает смисок пользователей в одном отделе
+     * Метод получает список пользователей в одном отделе
      * @param department - отдел
      * @return List<UsersEntity>
      */
     public List<UsersEntity> getAllByDepartment(DepartmentsEntity department) {
         return userRepository.getAllByDepartments(department);
+    }
+
+    /**
+     * Метод получает список пользователей в одном отделе в виде объекта пагинации
+     * @param department - отдел
+     * @param pageable - объект пагинации
+     * @return Page<UsersEntity>
+     */
+    private Page<UsersEntity> getAllByDepartament(DepartmentsEntity department, Pageable pageable) {
+        return userRepository.findAllByDepartments(department, pageable);
     }
 
     /**

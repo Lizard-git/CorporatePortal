@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "", schema = "msz")
+@Table(name = "msz", schema = "msz")
 public class MSZEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

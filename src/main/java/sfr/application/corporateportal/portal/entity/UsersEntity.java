@@ -10,7 +10,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -110,21 +109,13 @@ public class UsersEntity {
 
     //Рабочий Email
     @Email(message = "Неверно введен Email")
-    @Column(name = "workEmail", length = 100)
+    @Column(name = "workEmail", length = 100, unique = true)
     private String workEmail;
 
     //Домашний Email
     @Email(message = "Неверно введен Email")
-    @Column(name = "homeEmail", length = 100)
+    @Column(name = "homeEmail", length = 100, unique = true)
     private String homeEmail;
-
-
-    //Удалить при следующей генерации
-    //Опыт сотрудника (стаж)
-    @Column(name = "dateExperience")
-    @CreatedDate
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime dateExperience;
 
     //Дата рождения
     @Column(name = "dateBirthday")

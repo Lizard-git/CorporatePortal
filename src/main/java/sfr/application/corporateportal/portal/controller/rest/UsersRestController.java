@@ -8,7 +8,6 @@ import sfr.application.corporateportal.portal.entity.UsersEntity;
 import sfr.application.corporateportal.portal.service.SecurityService;
 import sfr.application.corporateportal.portal.service.UsersService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,12 +27,13 @@ public class UsersRestController {
         return users;
     }
 
-    @PostMapping(value = {"/get/by/department"})
+    @PostMapping(value = {"/get/all/department"})
     @ResponseBody
     public List<UsersEntity> GetAllUsersByDepartment() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UsersEntity user = usersService.findByUserLogin(auth.getName());
-        List<UsersEntity> users = new ArrayList<>();
+        List<UsersEntity> users = usersService.getAllByDepartment(user.getDepartments());
+        users = users.stream().filter(usersEntity -> !usersEntity.getId().equals(user.getId())).collect(Collectors.toList());
         return users;
     }
 }

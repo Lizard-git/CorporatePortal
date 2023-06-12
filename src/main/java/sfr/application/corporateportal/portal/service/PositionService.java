@@ -13,14 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 public class PositionService {
     private final PositionRepository positionRepository;
-    private final HistoryService historyService;
+    //private final HistoryService historyService;
+
     /**
-     * Получает все должности сотрудников
+     * Получает все должности сотрудников из базы данных
      * @return List<PositionEntity>
      */
     public List<PositionEntity> getAllPosition() {
         return positionRepository.findAll();
     }
-
-    // Методы CRUD
 }

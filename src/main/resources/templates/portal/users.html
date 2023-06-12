@@ -70,19 +70,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-<!--                                <tr th:each="user:${AllUsers}" th:data-slug="${user.getId()}">-->
-<!--                                    <td th:text="${user.getData().getSurname() + ' ' + user.getData().getName() + ' ' + user.getData().getMiddleName()}">-->
-<!--                                        1-->
-<!--                                    </td>-->
-<!--                                    <td th:text="${user.getData().getDepartments().getName()}">1</td>-->
-<!--                                    <td th:text="${user.getData().getPosition().getName()}">1</td>-->
-<!--                                    <td th:text="${user.getData().getIpPhone()}">1</td>-->
-<!--                                    <td th:text="${user.getData().getPhone()}">1</td>-->
-<!--                                    <td th:text="${user.getData().getCabinetNumber()}">1</td>-->
-<!--                                    <td>1</td>-->
-<!--                                    <td>1</td>-->
-<!--                                </tr>-->
-
                                 </tbody>
                             </table>
                         </div>
@@ -122,25 +109,6 @@
         }
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-
-    // $(document).ready(function () {
-    //     $('#table1').DataTable({
-    //         language: {
-    //             url: '/portal/ru.json'
-    //         },
-    //         "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-    //             var slug = $(nRow).data("slug");
-    //             $(nRow).attr("href", "/invoices/" + slug);
-    //             $(nRow).css('cursor', 'pointer');
-    //             $(nRow).click(function () {
-    //                 window.location = $(this).attr('href');
-    //                 return false;
-    //             });
-    //         }
-    //     });
-    //
-    //
-    // })
 
     $(document).ready(function () {
         $('#table1').DataTable({

@@ -2,7 +2,6 @@ package sfr.application.corporateportal.portal.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.validator.constraints.UniqueElements;
@@ -28,7 +27,6 @@ public class AuthorityEntity {
     @Column(name = "name" , nullable = false, unique = true, length = 50)
     private String name;
 
-    @NotNull
     @NotEmpty(message = "Имя права доступа не может быть пустым. (Имя будет указанно в системе)")
     @Size(min = 20, max = 50, message = "Минимум - 20 символов, максимально - 50 символов для описания роли")
     @Column(name = "shortName", nullable = false, length = 50)

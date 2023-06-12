@@ -25,6 +25,6 @@ public class AppController {
     @PostMapping("/add")
     public String AddApp(@ModelAttribute("NewApp") @Valid ApplicationsEntity application) {
         applicationService.add(application);
-        return "portal/apps";
+        return "redirect:/apps";
     }
 }

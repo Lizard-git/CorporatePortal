@@ -13,7 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 public class DepartmentsService {
     private final DepartmentsRepository departmentsRepository;
-    private final HistoryService historyService;
+    //private final HistoryService historyService;
+
+    /**
+     * Метод получает все отделы из базы данных
+     * @return List<DepartmentsEntity>
+     */
     public List<DepartmentsEntity> getAllDepartment() {
         return departmentsRepository.findAll();
     }

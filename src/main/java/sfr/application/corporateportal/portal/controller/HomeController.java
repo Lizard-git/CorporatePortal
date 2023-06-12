@@ -1,6 +1,8 @@
 package sfr.application.corporateportal.portal.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -28,7 +30,7 @@ public class HomeController {
         DepartmentsEntity department = user.getDepartments();
         List<UsersEntity> users = usersService.getAllByDepartment(department);
         users = users.stream().filter(usersEntity -> !usersEntity.getId().equals(user.getId())).collect(Collectors.toList());
-        model.addAttribute("Users", users);
+        model.addAttribute("Users", new PageImpl<>(users, PageRequest.of(0, 10), users.size()) );
 
         //Получение всех доступных авторизированному пользователю приложений
 

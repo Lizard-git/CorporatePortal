@@ -118,13 +118,13 @@
         <div class="row">
             <div class="col-12">
 
-                <div class="card">
+                <div class="card h-100">
                     <div class="card-header pt-3 pb-0 pe-2">
                         <h5 class="text-muted">Личные данные</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-12 col-md-4">
                                 <ul class="list-group">
                                     <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">Адрес:</strong> &nbsp;
@@ -133,45 +133,46 @@
                                         <span th:if="${User.getAddress().getFrame() == null}"
                                               th:text="${User.getAddress().getCity() + ' ' + User.getAddress().getStreet() + ' ' + User.getAddress().getHouse()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
                                     </li>
-                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getPhone() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">Городской номер:</strong> &nbsp;
                                         <nobr th:text="${User.getPhone()}">+7 (7898) 34 - 45 - 45
                                         </nobr>
                                     </li>
-                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getMobilePhone() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">Сотовый:</strong> &nbsp;
                                         <nobr th:text="${User.getMobilePhone()}">+7 (914) 999-99-99
                                         </nobr>
                                     </li>
-                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <ul class="list-group">
+                                    <li th:if="${User.getIpPhone() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">IP телефон:</strong> &nbsp;
                                         <nobr th:text="${User.getIpPhone()}">1613</nobr>
                                     </li>
-                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getIpAddressPC() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">IP адрес компьютера:</strong> &nbsp;
                                         <nobr th:text="${User.getIpAddressPC()}">10.85.5.4</nobr>
                                     </li>
-                                </ul>
-                            </div>
-                            <div class="col">
-                                <ul class="list-group">
-                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getWorkEmail() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">Рабочая почта:</strong> &nbsp;
                                         <nobr th:text="${User.getWorkEmail()}">User@arm.gs.gov</nobr>
                                     </li>
-                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <ul class="list-group">
+
+                                    <li th:if="${User.getHomeEmail() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">Домашняя почта:</strong> &nbsp;
                                         <nobr th:text="${User.getHomeEmail()}">user@mail.com</nobr>
                                     </li>
-                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
-                                            class="text-dark">Стаж:</strong> &nbsp;
-                                        <nobr>3 года</nobr>
-                                    </li>
-                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getCabinetNumber() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">Номер кабинета:</strong> &nbsp;
                                         <nobr th:text="${User.getCabinetNumber()}">5</nobr>
                                     </li>
-                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getIpAddressPC() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">IP адрес компьютера:</strong> &nbsp;
                                         <nobr th:text="${User.getIpAddressPC()}">10.85.5.4</nobr>
                                     </li>
