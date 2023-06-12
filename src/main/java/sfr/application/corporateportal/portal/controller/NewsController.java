@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import sfr.application.corporateportal.portal.entity.CommentsEntity;
 import sfr.application.corporateportal.portal.entity.NewsEntity;
 import sfr.application.corporateportal.portal.entity.UsersEntity;
 import sfr.application.corporateportal.portal.service.NewsService;
@@ -18,6 +19,7 @@ import sfr.application.corporateportal.portal.service.UsersService;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Date;
 import java.util.UUID;
 
 @Controller
@@ -92,5 +94,19 @@ public class NewsController {
         return "redirect:/news";
     }
 
+    @PostMapping("/comment/new/{id}")
+    public String NewComment(Model model, @PathVariable Long id, @RequestParam("comment") String comment) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UsersEntity user  = usersService.findByUserLogin(auth.getName());
 
+        CommentsEntity newComment = CommentsEntity.builder()
+                .news(newsService.getById(id))
+                .user(user)
+                .text(comment)
+                .creationDate(new Date())
+                .build();
+
+        newsService.addComment(newComment);
+        return "redirect:/news";
+    }
 }

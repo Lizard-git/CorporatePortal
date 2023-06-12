@@ -47,8 +47,7 @@ public class SecurityConfig {
                                 "portal/img/**",
                                 "portal/fonts/**",
                                 "portal/scss/**",
-                                "/files/**",
-                                "/news/**")
+                                "/files/**")
                         .permitAll()
                         .anyRequest().authenticated()
                 )

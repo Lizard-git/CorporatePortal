@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import sfr.application.corporateportal.portal.entity.CommentsEntity;
 import sfr.application.corporateportal.portal.entity.NewsEntity;
 import sfr.application.corporateportal.portal.entity.UsersEntity;
 import sfr.application.corporateportal.portal.repository.CommentRepository;
@@ -21,6 +22,11 @@ public class NewsService {
     private final NewsRepository newsRepository;
     private final HistoryService historyService;
     public final CommentRepository commentRepository;
+
+    public NewsEntity getById(Long id) {
+        return newsRepository.getReferenceById(id);
+    }
+
     /**
      * Метод получает все новости (опубликованные, неопубликованные, предложенные)
      * @return
@@ -91,5 +97,9 @@ public class NewsService {
             log.error("ERROR! News not deleted!");
             historyService.addNewHistory("Не удалось удалить новость: " + news.getTitle() + " обратитесь к администратору!", actionUser);
         }
+    }
+
+    public void addComment(CommentsEntity comments) {
+        commentRepository.save(comments);
     }
 }

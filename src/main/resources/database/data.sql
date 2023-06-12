@@ -3,6 +3,9 @@
 INSERT INTO dashboard.authority (description, name, shortname)
 VALUES ('All access point', 'SuperAdmin', 'SuperAdmin');
 
+INSERT INTO dashboard.authority (description, name, shortname)
+VALUES ('Access to all applications is closed, can only visit portal pages', 'UserDefault', 'UserDefault');
+
 -- --------------------------------------------------------------------------------------------------------------- --
 
 -- --------------------------------------------------------------------------------------------------------------- --
@@ -480,12 +483,31 @@ INSERT INTO dashboard.users (cabinetnumber, creationdate, datebirthday, deleteda
                              ipaddresspc, ipphone, isaccountnonexpired, isaccountnonlocked, iscredentialsnonexpired,
                              isenabled, lastmodifieddate, login, middlename, mobilephone, name, password, phone,
                              surname, workemail, idaddress, idddepartments, position)
-VALUES ('27', '2023-05-29 17:28:23.000000', '1983-07-31 00:00:00.000000', null,
+VALUES ('28', '2023-05-29 17:28:23.000000', '1983-07-31 00:00:00.000000', null,
         'test123128@gmail.com', '10.85.1.164', '4561', true, true, true, true, '2023-05-29 17:30:16.000000',
         'PodimalovaMN', 'Николаевна', '+79242794613', 'Марина',
         '$2a$12$2VDhsX0zfVscPXUuZqhUe.QAY3243G8sb94yhGDieyUpynKxNiRPm', '28 - 00 - 00', 'Подымалова',
         'podymalovamn@75.sfr.gov.ru', null, null, null);
 
+INSERT INTO dashboard.users (cabinetnumber, creationdate, datebirthday, deletedate, homeemail,
+                             ipaddresspc, ipphone, isaccountnonexpired, isaccountnonlocked, iscredentialsnonexpired,
+                             isenabled, lastmodifieddate, login, middlename, mobilephone, name, password, phone,
+                             surname, workemail, idaddress, idddepartments, position)
+VALUES ('32', '2023-05-29 17:28:23.000000', '1983-07-31 00:00:00.000000', null,
+        '1test123128@gmail.com', '10.85.1.165', '4581', true, true, true, true, '2023-05-29 17:30:16.000000',
+        'OgnevYA', 'Андреевич', '+79144415710', 'Ярослав',
+        '$2a$12$2VDhsX0zfVscPXUuZqhUe.QAY3243G8sb94yhGDieyUpynKxNiRPm', '28 - 00 - 00', 'Огнев',
+        'ognevyaa@75.sfr.gov.ru', null, null, null);
+
+INSERT INTO dashboard.users (cabinetnumber, creationdate, datebirthday, deletedate, homeemail,
+                             ipaddresspc, ipphone, isaccountnonexpired, isaccountnonlocked, iscredentialsnonexpired,
+                             isenabled, lastmodifieddate, login, middlename, mobilephone, name, password, phone,
+                             surname, workemail, idaddress, idddepartments, position)
+VALUES ('27', '2023-05-29 17:28:23.000000', '1983-07-31 00:00:00.000000', null,
+        '2test123128@gmail.com', '10.85.1.161', '4561', true, true, true, true, '2023-05-29 17:30:16.000000',
+        'MatveevaVA', 'Александровна', '+79243789108', 'Виктория',
+        '$2a$12$2VDhsX0zfVscPXUuZqhUe.QAY3243G8sb94yhGDieyUpynKxNiRPm', '28 - 00 - 00', 'Матвеева',
+        'strelnikovava@75.sfr.gov.ru', null, null, null);
 -- --------------------------------------------------------------------------------------------------------------- --
 
 -- --------------------------------------------------------------------------------------------------------------- --
@@ -521,6 +543,18 @@ VALUES (
            (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_UserDefault')
        );
 
+INSERT INTO dashboard.users_roles(user_id, role_id)
+VALUES (
+           (SELECT id from dashboard.users as users WHERE users.login = 'OgnevYA'),
+           (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_UserDefault')
+       );
+
+INSERT INTO dashboard.users_roles(user_id, role_id)
+VALUES (
+           (SELECT id from dashboard.users as users WHERE users.login = 'MatveevaVA'),
+           (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_UserDefault')
+       );
+
 -- --------------------------------------------------------------------------------------------------------------- --
 
 -- --------------------------------------------------------------------------------------------------------------- --
@@ -533,8 +567,8 @@ VALUES (
 
 INSERT INTO dashboard.roles_authority(role_id, authority_id)
 VALUES (
-           (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_SuperAdmin'),
-           (SELECT id from dashboard.authority as authorityes WHERE authorityes.name = 'SuperAdmin')
+           (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_UserDefault'),
+           (SELECT id from dashboard.authority as authorityes WHERE authorityes.name = 'UserDefault')
        );
 -- --------------------------------------------------------------------------------------------------------------- --
 
@@ -546,6 +580,14 @@ WHERE login='Lizard';
 UPDATE dashboard.users
 SET idddepartments=(SELECT id FROM dashboard.departments as dep WHERE dep.name = 'Отдел эксплуатации и сопровождения информационных подсистем (085-460-4601)')
 WHERE login='PodimalovaMN';
+
+UPDATE dashboard.users
+SET idddepartments=(SELECT id FROM dashboard.departments as dep WHERE dep.name = 'Отдел эксплуатации и сопровождения информационных подсистем (085-460-4601)')
+WHERE login='MatveevaVA';
+
+UPDATE dashboard.users
+SET idddepartments=(SELECT id FROM dashboard.departments as dep WHERE dep.name = 'Отдел эксплуатации средств вычислительной техники программного обеспечения и телекоммуникационного оборудования (085-460-4603)')
+WHERE login='OgnevYA';
 -- --------------------------------------------------------------------------------------------------------------- --
 
 -- --------------------------------------------------------------------------------------------------------------- --
@@ -558,6 +600,14 @@ UPDATE dashboard.users
 SET "position"=(SELECT id FROM dashboard."position" as pos WHERE pos.name = 'Начальник управления')
 WHERE login='PodimalovaMN';
 
+UPDATE dashboard.users
+SET "position"=(SELECT id FROM dashboard."position" as pos WHERE pos.name = 'Ведущий специалист - эксперт')
+WHERE login='MatveevaVA';
+
+UPDATE dashboard.users
+SET "position"=(SELECT id FROM dashboard."position" as pos WHERE pos.name = 'Cпециалист - эксперт')
+WHERE login='OgnevYA';
+
 -- --------------------------------------------------------------------------------------------------------------- --
 
 -- --------------------------------------------------------------------------------------------------------------- --
@@ -579,6 +629,24 @@ SET idaddress = (
             address.house = '160Б'
 )
 WHERE login='PodimalovaMN';
+
+UPDATE dashboard.users
+SET idaddress = (
+    SELECT id FROM dashboard.address as address WHERE
+            address.city = 'г.Чита' and
+            address.street = 'ул.Чкалова' and
+            address.house = '160Б'
+)
+WHERE login='OgnevYA';
+
+UPDATE dashboard.users
+SET idaddress = (
+    SELECT id FROM dashboard.address as address WHERE
+            address.city = 'г.Чита' and
+            address.street = 'ул.Чкалова' and
+            address.house = '160Б'
+)
+WHERE login='MatveevaVA';
 
 -- --------------------------------------------------------------------------------------------------------------- --
 
