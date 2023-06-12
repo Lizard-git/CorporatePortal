@@ -49,7 +49,7 @@ public class NewsController {
 
         }
         model.addAttribute("User", user);
-        model.addAttribute("News", newsService.getAllNews());
+        //model.addAttribute("News", newsService.getAllNews());
         return "portal/news";
     }
 

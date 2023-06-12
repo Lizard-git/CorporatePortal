@@ -2,6 +2,8 @@ package sfr.application.corporateportal.portal.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import sfr.application.corporateportal.portal.entity.NewsEntity;
@@ -25,6 +27,15 @@ public class NewsService {
      */
     public List<NewsEntity> getAllNews() {
         return newsRepository.findAll();
+    }
+
+    /**
+     * Метод получает все новости в виде объекта пагинации
+     * @param pageable - объект пагинации
+     * @return Page<NewsEntity>
+     */
+    public Page<NewsEntity> getAllNews(Pageable pageable) {
+        return newsRepository.findAll(pageable);
     }
 
     /**

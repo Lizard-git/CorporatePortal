@@ -50,6 +50,6 @@ public class NewsEntity {
     @JoinColumn(name = "userPublication", nullable = false)
     private UsersEntity user;
 
-    @OneToMany(mappedBy = "news")
+    @OneToMany(mappedBy = "news", fetch = FetchType.EAGER)
     private List<CommentsEntity> comments;
 }
