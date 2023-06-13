@@ -40,8 +40,8 @@
     <nav th:replace="~{/portal/fragments/header-fragment.html::header('Приложения')}"></nav>
     <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-12 col-md-4 col-xl-3 pb-4">
-                <a th:each="app:${AllApp}" class="card h-100 mb-3" th:href="${app.getUrl()}">
+            <div th:each="app:${AllApp}" class="col-12 col-md-4 col-xl-3 pb-4">
+                <a class="card h-100 mb-3" th:href="${app.getUrl()}">
                     <div class="card-header d-flex justify-content-between">
                         <h5 th:text="${app.getName()}"></h5>
                         <p th:text="${app.getStatus().getName()}"></p>
