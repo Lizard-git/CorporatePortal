@@ -12,7 +12,7 @@
         <a class="nav-link" th:classappend="${active == 'security'} ? 'active'" href="/settings/security">Безопастность</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" sec:authorize="${hasAnyAuthority('SequrityDefault, AdminDefault', 'SuperAdmin')}" th:classappend="${active == 'user-security'} ? 'active'" href="/settings/user/security">Сотруднику безопастнсти</a>
+        <a class="nav-link" sec:authorize="${hasAnyAuthority('SequrityDefault', 'AdminDefault', 'SuperAdmin')}" th:classappend="${active == 'user-security'} ? 'active'" href="/settings/user/security">Сотруднику безопастнсти</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" sec:authorize="${hasAnyAuthority('AdminDefault', 'SuperAdmin')}" th:classappend="${active == 'user-admin'} ? 'active'" href="/settings/user/administrator">Администратору</a>
