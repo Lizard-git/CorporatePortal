@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import sfr.application.corporateportal.portal.dto.input_entity_dto.AuthDataDTO;
 import sfr.application.corporateportal.portal.dto.input_entity_dto.ChangeUserDto;
 import sfr.application.corporateportal.portal.dto.input_entity_dto.CreateUserDTO;
+import sfr.application.corporateportal.portal.entity.RolesEntity;
 import sfr.application.corporateportal.portal.entity.UsersEntity;
 import sfr.application.corporateportal.portal.service.*;
 
@@ -94,6 +95,27 @@ public class UsersController {
         return "redirect:/settings";
     }
 
+    @PostMapping("/change/{id}")
+    public String ChangeDataUserForAdm(@PathVariable Long id,
+                                       @ModelAttribute("User") @Valid UsersEntity userChange,
+                                       BindingResult bindingResult,
+                                       Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UsersEntity user = usersService.findByUserLogin(auth.getName());
+
+        if (!bindingResult.hasErrors() || bindingResult.getFieldError().getField().equals("password")) {
+            usersService.changeDataUser(userChange ,user);
+        } else {
+            model.addAttribute("User", usersService.getById(id));
+            model.addAttribute("AllRoles", securityService.getAllRoles());
+            model.addAttribute("AllAddress", addressService.getAllAddress());
+            model.addAttribute("AllDepartments", departmentsService.getAllDepartment());
+            model.addAttribute("AllPosition", positionService.getAllPosition());
+            return "portal/profile";
+        }
+        return "redirect:/users/get/" + id;
+    }
+
     @PostMapping(path = {"/save"})
     public String SaveNewUser(
             @ModelAttribute("NewUser") @Valid CreateUserDTO userDTO,
@@ -137,6 +159,17 @@ public class UsersController {
         UsersEntity user = usersService.findByUserLogin(auth.getName());
         usersService.block(blockUser, user);
         return "redirect:/users/get/" + blockUser.getId();
+    }
+
+    @PostMapping("/{user}/role/add")
+    public String AddRole(@PathVariable UsersEntity user, @RequestParam("role") RolesEntity role) {
+        usersService.addRole(role, user);
+        return "redirect:/users/get/" + user.getId();
+    }
+    @GetMapping("/{user}/role/remove/{role}")
+    public String RemoveRole(@PathVariable UsersEntity user, @PathVariable RolesEntity role) {
+        usersService.removeRole(role, user);
+        return "redirect:/users/get/" + user.getId();
     }
 }
 

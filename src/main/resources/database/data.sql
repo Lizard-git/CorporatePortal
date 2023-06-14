@@ -4,7 +4,13 @@ INSERT INTO dashboard.authority (description, name, shortname)
 VALUES ('All access point', 'SuperAdmin', 'SuperAdmin');
 
 INSERT INTO dashboard.authority (description, name, shortname)
-VALUES ('Access to all applications is closed, can only visit portal pages', 'UserDefault', 'UserDefault');
+VALUES ('Sequrity access point', 'SequrityDefault', 'Sequrity');
+
+INSERT INTO dashboard.authority (description, name, shortname)
+VALUES ('All access point', 'AdminDefault', 'Admin');
+
+INSERT INTO dashboard.authority (description, name, shortname)
+VALUES ('Access to all applications is closed, can only visit portal pages', 'UserDefault', 'User');
 
 -- --------------------------------------------------------------------------------------------------------------- --
 
@@ -14,8 +20,41 @@ INSERT INTO dashboard.roles (description, name, shortname)
 VALUES ('All access point', 'ROLE_SuperAdmin', 'SuperAdmin');
 
 INSERT INTO dashboard.roles (description, name, shortname)
-VALUES ('Access to all applications is closed, can only visit portal pages', 'ROLE_UserDefault', 'UserDefault');
+VALUES ('All access point', 'ROLE_AdminDefault', 'Admin');
 
+INSERT INTO dashboard.roles (description, name, shortname)
+VALUES ('All access point', 'ROLE_SequrityDefault', 'Sequrity');
+
+INSERT INTO dashboard.roles (description, name, shortname)
+VALUES ('Access to all applications is closed, can only visit portal pages', 'ROLE_UserDefault', 'User');
+
+-- --------------------------------------------------------------------------------------------------------------- --
+
+-- --------------------------------------------------------------------------------------------------------------- --
+
+INSERT INTO dashboard.roles_authority(role_id, authority_id)
+VALUES (
+           (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_SuperAdmin'),
+           (SELECT id from dashboard.authority as authorityes WHERE authorityes.name = 'SuperAdmin')
+       );
+
+INSERT INTO dashboard.roles_authority(role_id, authority_id)
+VALUES (
+           (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_UserDefault'),
+           (SELECT id from dashboard.authority as authorityes WHERE authorityes.name = 'UserDefault')
+       );
+
+INSERT INTO dashboard.roles_authority(role_id, authority_id)
+VALUES (
+           (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_AdminDefault'),
+           (SELECT id from dashboard.authority as authorityes WHERE authorityes.name = 'AdminDefault')
+       );
+
+INSERT INTO dashboard.roles_authority(role_id, authority_id)
+VALUES (
+           (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_SequrityDefault'),
+           (SELECT id from dashboard.authority as authorityes WHERE authorityes.name = 'SequrityDefault')
+       );
 -- --------------------------------------------------------------------------------------------------------------- --
 
 -- --------------------------------------------------------------------------------------------------------------- --
@@ -555,21 +594,6 @@ VALUES (
            (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_UserDefault')
        );
 
--- --------------------------------------------------------------------------------------------------------------- --
-
--- --------------------------------------------------------------------------------------------------------------- --
-
-INSERT INTO dashboard.roles_authority(role_id, authority_id)
-VALUES (
-           (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_SuperAdmin'),
-           (SELECT id from dashboard.authority as authorityes WHERE authorityes.name = 'SuperAdmin')
-       );
-
-INSERT INTO dashboard.roles_authority(role_id, authority_id)
-VALUES (
-           (SELECT id from dashboard.roles as rolse WHERE rolse.name = 'ROLE_UserDefault'),
-           (SELECT id from dashboard.authority as authorityes WHERE authorityes.name = 'UserDefault')
-       );
 -- --------------------------------------------------------------------------------------------------------------- --
 
 -- --------------------------------------------------------------------------------------------------------------- --

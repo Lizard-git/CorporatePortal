@@ -13,7 +13,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8"/>
@@ -36,6 +36,7 @@
             background-color: #8a0957 !important;
             color: white !important;
         }
+
         .function-btn > a:hover svg {
             fill: white !important;
             stroke: white !important;
@@ -83,7 +84,9 @@
                         <ul class="nav nav-pills nav-fill p-1 bg-transparent">
                             <li class="nav-item function-btn">
                                 <a class="nav-link mb-0 px-0 py-1 " th:href="'/messenger/new/' + ${User.getId()}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                         fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-message-square">
                                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                                     </svg>
                                     <span class="ms-1">Написать</span>
@@ -91,15 +94,20 @@
                             </li>
                             <li class="nav-item function-btn">
                                 <a class="nav-link mb-0 px-0 py-1" th:href="'/users/block/' + ${User.getId()}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock">
-                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                         fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-lock">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg>
                                     <span class="ms-1">Заблокировать</span>
                                 </a>
                             </li>
                             <li class="nav-item function-btn">
                                 <a class="nav-link mb-0 px-0 py-1" th:href="'/users/delete/' + ${User.getId()}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                         fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-trash-2">
                                         <polyline points="3 6 5 6 21 6"></polyline>
                                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                                         <line x1="10" y1="11" x2="10" y2="17"></line>
@@ -114,7 +122,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid py-4" >
+    <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
 
@@ -133,12 +141,14 @@
                                         <span th:if="${User.getAddress().getFrame() == null}"
                                               th:text="${User.getAddress().getCity() + ' ' + User.getAddress().getStreet() + ' ' + User.getAddress().getHouse()}">ул.Чкалова 160Б (ГО СФР по Забайкальскому краю)</span>
                                     </li>
-                                    <li th:if="${User.getPhone() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getPhone() != null}"
+                                        class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">Городской номер:</strong> &nbsp;
                                         <nobr th:text="${User.getPhone()}">+7 (7898) 34 - 45 - 45
                                         </nobr>
                                     </li>
-                                    <li th:if="${User.getMobilePhone() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getMobilePhone() != null}"
+                                        class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">Сотовый:</strong> &nbsp;
                                         <nobr th:text="${User.getMobilePhone()}">+7 (914) 999-99-99
                                         </nobr>
@@ -147,15 +157,18 @@
                             </div>
                             <div class="col-12 col-md-4">
                                 <ul class="list-group">
-                                    <li th:if="${User.getIpPhone() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getIpPhone() != null}"
+                                        class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">IP телефон:</strong> &nbsp;
                                         <nobr th:text="${User.getIpPhone()}">1613</nobr>
                                     </li>
-                                    <li th:if="${User.getIpAddressPC() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getIpAddressPC() != null}"
+                                        class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">IP адрес компьютера:</strong> &nbsp;
                                         <nobr th:text="${User.getIpAddressPC()}">10.85.5.4</nobr>
                                     </li>
-                                    <li th:if="${User.getWorkEmail() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getWorkEmail() != null}"
+                                        class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">Рабочая почта:</strong> &nbsp;
                                         <nobr th:text="${User.getWorkEmail()}">User@arm.gs.gov</nobr>
                                     </li>
@@ -164,15 +177,18 @@
                             <div class="col-12 col-md-4">
                                 <ul class="list-group">
 
-                                    <li th:if="${User.getHomeEmail() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getHomeEmail() != null}"
+                                        class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">Домашняя почта:</strong> &nbsp;
                                         <nobr th:text="${User.getHomeEmail()}">user@mail.com</nobr>
                                     </li>
-                                    <li th:if="${User.getCabinetNumber() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getCabinetNumber() != null}"
+                                        class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">Номер кабинета:</strong> &nbsp;
                                         <nobr th:text="${User.getCabinetNumber()}">5</nobr>
                                     </li>
-                                    <li th:if="${User.getIpAddressPC() != null}" class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
+                                    <li th:if="${User.getIpAddressPC() != null}"
+                                        class="list-group-item border-0 ps-0 pt-0 text-sm"><strong
                                             class="text-dark">IP адрес компьютера:</strong> &nbsp;
                                         <nobr th:text="${User.getIpAddressPC()}">10.85.5.4</nobr>
                                     </li>
@@ -184,6 +200,7 @@
             </div>
         </div>
     </div>
+    <div sec:authorize="${hasAnyAuthority('SequrityDefault', 'AdminDefault', 'SuperAdmin')}">
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
@@ -192,159 +209,203 @@
                         <div class="card-header pt-3 pb-0 pe-2">
                             <h5 class="text-muted">Личные данные</h5>
                         </div>
-                                <div class="card-body mt-0 pt-0">
-                                    <form method="post" th:action="'/users/change/' + ${User.getId()}" th:object="${User}">
-                                        <div class="row">
-                                            <div class="col-12 col-md-6 col-xl-4">
-                                                <div class="form-group">
-                                                    <label for="login-input">Логин</label>
-                                                    <input type="text" class="form-control" id="login-input" placeholder="OrlovAE" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" th:field="*{login}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Ошибка</small>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="surname-input">Фамилия</label>
-                                                    <input type="text" class="form-control" id="surname-input" placeholder="Фамилия" th:field="*{surname}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Ошибка</small>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="ip-phone">IP Телефон</label>
-                                                    <input type="text" class="form-control" id="ip-phone" placeholder="****" th:field="*{ipPhone}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('ipPhone')}" th:errors="*{ipPhone}">Ошибка</small>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="address-input">Адрес</label>
-                                                    <select class="form-select" id="address-input" th:field="*{address}">
-                                                        <option th:each="address: ${AllAddress}" th:value="${address.getId()}" th:text="${address.getCity() + ' ' + address.getStreet() + ' ' + address.getHouse()}"></option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="department-input">Отдел</label>
-                                                    <select class="form-select" id="department-input" th:field="*{departments}">
-                                                        <option th:each="department : ${AllDepartments}" th:value="${department.getId()}" th:text="${department.getName()}" th:title="${department.getDescription()}"></option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="position-input">Должность</label>
-                                                    <select class="form-select" id="position-input" th:field="*{position}">
-                                                        <option th:each="position : ${AllPosition}" th:value="${position.getId()}" th:text="${position.getName()}"></option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-xl-4">
-                                                <div class="form-group">
-                                                    <label for="old-password">Пароль</label>
-                                                    <input type="password" class="form-control" id="old-password" placeholder="******" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" th:field="*{password}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Ошибка</small>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="name-input">Имя</label>
-                                                    <input type="text" class="form-control" id="name-input" placeholder="Имя" th:field="*{name}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка</small>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="ipPhone">Городской номер</label>
-                                                    <input type="text" class="form-control" id="ipPhone" placeholder="**-**-**" th:field="*{phone}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Ошибка</small>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="home-email">Email (личный)</label>
-                                                    <input type="text" class="form-control" id="home-email" placeholder="test@gmail.com" th:field="*{homeEmail}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('homeEmail')}" th:errors="*{homeEmail}">Ошибка</small>
-                                                </div>
+                        <div class="card-body mt-0 pt-0">
+                            <form method="post" th:action="'/users/change/' + ${User.getId()}" th:object="${User}">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-xl-4">
+                                        <div class="form-group">
+                                            <label for="login-input">Логин</label>
+                                            <input type="text" class="form-control" id="login-input"
+                                                   placeholder="OrlovAE" autocomplete="off" readonly
+                                                   onfocus="this.removeAttribute('readonly')" th:field="*{login}">
+                                            <small class="form-text text-danger" th:if="${#fields.hasErrors('login')}"
+                                                   th:errors="*{login}">Ошибка</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="surname-input">Фамилия</label>
+                                            <input type="text" class="form-control" id="surname-input"
+                                                   placeholder="Фамилия" th:field="*{surname}">
+                                            <small class="form-text text-danger" th:if="${#fields.hasErrors('surname')}"
+                                                   th:errors="*{surname}">Ошибка</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ip-phone">IP Телефон</label>
+                                            <input type="text" class="form-control" id="ip-phone" placeholder="****"
+                                                   th:field="*{ipPhone}">
+                                            <small class="form-text text-danger" th:if="${#fields.hasErrors('ipPhone')}"
+                                                   th:errors="*{ipPhone}">Ошибка</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address-input">Адрес</label>
+                                            <select class="form-select" id="address-input" th:field="*{address}">
+                                                <option th:each="address: ${AllAddress}" th:value="${address.getId()}"
+                                                        th:text="${address.getCity() + ' ' + address.getStreet() + ' ' + address.getHouse()}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="department-input">Отдел</label>
+                                            <select class="form-select" id="department-input" th:field="*{departments}">
+                                                <option th:each="department : ${AllDepartments}"
+                                                        th:value="${department.getId()}"
+                                                        th:text="${department.getName()}"
+                                                        th:title="${department.getDescription()}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="position-input">Должность</label>
+                                            <select class="form-select" id="position-input" th:field="*{position}">
+                                                <option th:each="position : ${AllPosition}"
+                                                        th:value="${position.getId()}"
+                                                        th:text="${position.getName()}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-xl-4">
+                                        <div class="form-group">
+                                            <label for="old-password">Пароль</label>
+                                            <input type="password" class="form-control" id="old-password"
+                                                   placeholder="******" autocomplete="off" readonly
+                                                   onfocus="this.removeAttribute('readonly')" th:field="*{password}">
+                                            <small class="form-text text-danger"
+                                                   th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Ошибка</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name-input">Имя</label>
+                                            <input type="text" class="form-control" id="name-input" placeholder="Имя"
+                                                   th:field="*{name}">
+                                            <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}"
+                                                   th:errors="*{name}">Ошибка</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ipPhone">Городской номер</label>
+                                            <input type="text" class="form-control" id="ipPhone" placeholder="**-**-**"
+                                                   th:field="*{phone}">
+                                            <small class="form-text text-danger" th:if="${#fields.hasErrors('phone')}"
+                                                   th:errors="*{phone}">Ошибка</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="home-email">Email (личный)</label>
+                                            <input type="text" class="form-control" id="home-email"
+                                                   placeholder="test@gmail.com" th:field="*{homeEmail}">
+                                            <small class="form-text text-danger"
+                                                   th:if="${#fields.hasErrors('homeEmail')}" th:errors="*{homeEmail}">Ошибка</small>
+                                        </div>
 
-                                                <div class="form-group">
-                                                    <label for="ip-address-pc-input">IP Адрес компьютера</label>
-                                                    <input type="text" class="form-control" id="ip-address-pc-input" placeholder="***" th:field="*{ipAddressPC}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('ipAddressPC')}" th:errors="*{ipAddressPC}">Ошибка</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-xl-4">
-                                                <div class="form-group">
-                                                    <label for="date-birthday">Дата рождения</label>
-                                                    <input type="date" class="form-control" id="date-birthday" th:field="*{dateBirthday}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('dateBirthday')}" th:errors="*{dateBirthday}">Ошибка</small>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="middle-name-input">Отчество</label>
-                                                    <input type="text" class="form-control" id="middle-name-input" placeholder="Отчество" th:field="*{middleName}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">Ошибка</small>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="mobile-phone">Мобильный телефон</label>
-                                                    <input type="text" class="form-control" id="mobile-phone" placeholder="+* (***) ***-**-**" th:field="*{mobilePhone}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('mobilePhone')}" th:errors="*{mobilePhone}">Ошибка</small>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="work-email">Email (рабочий)</label>
-                                                    <input type="text" class="form-control" id="work-email" placeholder="test@75.sfr.gov.ru" th:field="*{workEmail}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('workEmail')}" th:errors="*{workEmail}">Ошибка</small>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="cabinet-number-input">Номер кабинета</label>
-                                                    <input type="text" class="form-control" id="cabinet-number-input" placeholder="***" th:field="*{cabinetNumber}">
-                                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('cabinetNumber')}" th:errors="*{cabinetNumber}">Ошибка</small>
-                                                </div>
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="ip-address-pc-input">IP Адрес компьютера</label>
+                                            <input type="text" class="form-control" id="ip-address-pc-input"
+                                                   placeholder="***" th:field="*{ipAddressPC}">
+                                            <small class="form-text text-danger"
+                                                   th:if="${#fields.hasErrors('ipAddressPC')}"
+                                                   th:errors="*{ipAddressPC}">Ошибка</small>
                                         </div>
-                                        <button type="submit" class="btn btn-outline-success float-end">Изменить</button>
-                                    </form>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-xl-4">
+                                        <div class="form-group">
+                                            <label for="date-birthday">Дата рождения</label>
+                                            <input type="date" class="form-control" id="date-birthday"
+                                                   th:field="*{dateBirthday}">
+                                            <small class="form-text text-danger"
+                                                   th:if="${#fields.hasErrors('dateBirthday')}"
+                                                   th:errors="*{dateBirthday}">Ошибка</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="middle-name-input">Отчество</label>
+                                            <input type="text" class="form-control" id="middle-name-input"
+                                                   placeholder="Отчество" th:field="*{middleName}">
+                                            <small class="form-text text-danger"
+                                                   th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">Ошибка</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mobile-phone">Мобильный телефон</label>
+                                            <input type="text" class="form-control" id="mobile-phone"
+                                                   placeholder="+* (***) ***-**-**" th:field="*{mobilePhone}">
+                                            <small class="form-text text-danger"
+                                                   th:if="${#fields.hasErrors('mobilePhone')}"
+                                                   th:errors="*{mobilePhone}">Ошибка</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="work-email">Email (рабочий)</label>
+                                            <input type="text" class="form-control" id="work-email"
+                                                   placeholder="test@75.sfr.gov.ru" th:field="*{workEmail}">
+                                            <small class="form-text text-danger"
+                                                   th:if="${#fields.hasErrors('workEmail')}" th:errors="*{workEmail}">Ошибка</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cabinet-number-input">Номер кабинета</label>
+                                            <input type="text" class="form-control" id="cabinet-number-input"
+                                                   placeholder="***" th:field="*{cabinetNumber}">
+                                            <small class="form-text text-danger"
+                                                   th:if="${#fields.hasErrors('cabinetNumber')}"
+                                                   th:errors="*{cabinetNumber}">Ошибка</small>
+                                        </div>
+                                    </div>
                                 </div>
+                                <button type="submit" class="btn btn-outline-success float-end">Изменить</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid py-4">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header pt-3 pb-0 pe-2">
-                            <h5 class="text-muted">Роли</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 col-md-6 col-xl-8">
-                                    <h6>Добавить роль для пользователя</h6>
-                                    <form>
-                                        <div class="row">
-                                            <div class="input-group">
-                                                <select class="form-select" >
-                                                    <option value="-1" selected>Выберете роль</option>
-                                                    <option th:each="role: ${AllRoles}" th:text="${role.name}" th:value="${role.id}"></option>
-                                                </select>
-                                                <button  class="btn btn-outline-success m-0" type="submit" name="addRole">Добавить</button>
-                                            </div>
+    </div>
+    <div sec:authorize="${hasAnyAuthority('SequrityDefault, AdminDefault', 'SuperAdmin')}" class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header pt-3 pb-0 pe-2">
+                        <h5 class="text-muted">Роли</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-xl-8">
+                                <h6>Добавить роль для пользователя</h6>
+                                <form method="post" th:action="'/users/' + ${User.getId()} + '/role/add'">
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <select name="role" class="form-select">
+                                                <option value="-1" selected>Выберете роль</option>
+                                                <option th:each="role: ${AllRoles}" th:text="${role.name}"
+                                                        th:value="${role.id}"></option>
+                                            </select>
+                                            <button class="btn btn-outline-success m-0" type="submit" name="addRole">
+                                                Добавить
+                                            </button>
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-4">
-                                    <h6>Роли</h6>
-                                    <ul class="list-group" >
-                                        <li th:each="role: ${User.getRoles()}" class="list-group-item border-0 ps-0 pt-0 text-sm d-flex justify-content-between">
-                                            <strong class="text-dark" th:text="${role.getShortName()}"></strong>
-                                            <a class="btn-delete" th:href="'/users/' + ${User.getId()} + '/role/delete/' + ${role.getId()}" title="Удалить роль"><img width="22" height="22" src="/portal/fonts/icons/delete.svg"></a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <h6>Роли</h6>
+                                <ul class="list-group">
+                                    <li th:each="role: ${User.getRoles()}"
+                                        class="list-group-item border-0 ps-0 pt-0 text-sm d-flex justify-content-between">
+                                        <strong class="text-dark" th:text="${role.getShortName()}"></strong>
+                                        <a class="btn-delete"
+                                           th:href="'/users/' + ${User.getId()} + '/role/remove/' + ${role.getId()}"
+                                           title="Удалить роль"><img width="22" height="22"
+                                                                     src="/portal/fonts/icons/delete.svg"></a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid py-4">
-            <footer class="footer pt-3  ">
-                <div class="container-fluid">
-                    <div class="row align-items-center justify-content-lg-between">
-                        <div class="col-lg-6 mb-lg-0 mb-4">
-                            <div class="copyright text-center text-sm text-muted text-lg-start">
-                                © Alex Orl
-                            </div>
+    </div>
+    <div sec:authorize="${hasAnyAuthority('SequrityDefault, AdminDefault', 'SuperAdmin')}" class="container-fluid py-4">
+        <footer class="footer pt-3  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                        <div class="copyright text-center text-sm text-muted text-lg-start">
+                            © Alex Orl
                         </div>
                     </div>
                 </div>
-            </footer>
-        </div>
+            </div>
+        </footer>
     </div>
 </main>
 <!--   Core JS Files   -->

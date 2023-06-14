@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -12,10 +12,10 @@
         <a class="nav-link" th:classappend="${active == 'security'} ? 'active'" href="/settings/security">Безопастность</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" th:classappend="${active == 'user-security'} ? 'active'" href="/settings/user/security">Сотруднику безопастнсти</a>
+        <a class="nav-link" sec:authorize="${hasAnyAuthority('SequrityDefault, AdminDefault', 'SuperAdmin')}" th:classappend="${active == 'user-security'} ? 'active'" href="/settings/user/security">Сотруднику безопастнсти</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" th:classappend="${active == 'user-admin'} ? 'active'" href="/settings/user/administrator">Администратору</a>
+        <a class="nav-link" sec:authorize="${hasAnyAuthority('AdminDefault', 'SuperAdmin')}" th:classappend="${active == 'user-admin'} ? 'active'" href="/settings/user/administrator">Администратору</a>
     </li>
 <!--    <li class="nav-item">-->
 <!--        <a class="nav-link" th:classappend="${active == 'additionally'} ? 'active'" href="/settings/additionally">Дополнительно</a>-->

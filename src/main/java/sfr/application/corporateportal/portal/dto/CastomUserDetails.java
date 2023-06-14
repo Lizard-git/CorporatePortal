@@ -7,7 +7,6 @@ import org.springframework.util.ObjectUtils;
 import sfr.application.corporateportal.portal.entity.RolesEntity;
 import sfr.application.corporateportal.portal.entity.UsersEntity;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -40,11 +39,11 @@ public class CastomUserDetails implements UserDetails {
     }
 
     private Collection<? extends GrantedAuthority> mapRoleToAuthorities(Collection<RolesEntity> role) {
-        Collection<? extends GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        role.forEach(r -> {
-            r.getAuthority().stream().map(authority -> new SimpleGrantedAuthority(authority.getName())).collect(Collectors.toList());
-        });
-        return grantedAuthorities;
+        return role.stream()
+                .map(RolesEntity::getAuthority)
+                .flatMap(Collection::stream)
+                .map(it -> new SimpleGrantedAuthority(it.getName()))
+                .collect(Collectors.toList());
     }
 
     @Override

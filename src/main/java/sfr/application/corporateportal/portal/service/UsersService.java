@@ -11,13 +11,16 @@ import sfr.application.corporateportal.portal.dto.input_entity_dto.AuthDataDTO;
 import sfr.application.corporateportal.portal.dto.input_entity_dto.ChangeUserDto;
 import sfr.application.corporateportal.portal.dto.input_entity_dto.CreateUserDTO;
 import sfr.application.corporateportal.portal.entity.DepartmentsEntity;
+import sfr.application.corporateportal.portal.entity.RolesEntity;
 import sfr.application.corporateportal.portal.entity.UsersEntity;
+import sfr.application.corporateportal.portal.repository.RoleRepository;
 import sfr.application.corporateportal.portal.repository.UserRepository;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -26,6 +29,7 @@ public class UsersService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final HistoryService historyService;
+    private final RoleRepository roleRepository;
 
     /**
      * Вернет пользователя по его ID из базы данных
@@ -210,6 +214,39 @@ public class UsersService {
         }
     }
 
+    public void changeDataUser(UsersEntity user, UsersEntity userAction) {
+        if (!ObjectUtils.isEmpty(user)) {
+            UsersEntity userForPassword = userRepository.getByLogin(user.getLogin());
+            try {
+                if (!ObjectUtils.isEmpty(user.getPassword())) {
+                    userForPassword.setPassword(passwordEncoder.encode(user.getPassword()));
+                }
+                userForPassword.setLogin(user.getLogin());
+                userForPassword.setDateBirthday(user.getDateBirthday());
+                userForPassword.setSurname(user.getSurname());
+                userForPassword.setName(user.getName());
+                userForPassword.setMiddleName(user.getMiddleName());
+                userForPassword.setIpPhone(user.getIpPhone());
+                userForPassword.setPhone(user.getPhone());
+                userForPassword.setMobilePhone(user.getMobilePhone());
+                userForPassword.setAddress(user.getAddress());
+                userForPassword.setHomeEmail(user.getHomeEmail());
+                userForPassword.setWorkEmail(user.getWorkEmail());
+                userForPassword.setDepartments(user.getDepartments());
+                userForPassword.setPosition(user.getPosition());
+                userForPassword.setIpAddressPC(user.getIpAddressPC());
+                userForPassword.setCabinetNumber(user.getCabinetNumber());
+                userRepository.save(userForPassword);
+                log.info("Change data user!");
+                historyService.addNewHistory("Изменены данные пользователя: " + user.getLogin(), userAction);
+            } catch (Exception e) {
+                log.error("Error change data user!");
+                historyService.addNewHistory("ОШИБКА! При изменении данных пользователя: " + user.getLogin() + " произошла ошибка! Обратитесь к администратору.", userAction);
+            }
+        }
+    }
+
+
     /**
      * Метод меняет пароль зарегистрированного пользователя
      * @param dataUsers -
@@ -273,5 +310,20 @@ public class UsersService {
             log.info("Error ! User not blocked!");
             historyService.addNewHistory("Пользователь: " + user.getLogin() + " не заблокирован, произошла ошибка! Обратитесь к администратору.", user);
         }
+    }
+
+    public void addRole(RolesEntity roles, UsersEntity user) {
+        List<RolesEntity> defaultRoles = user.getRoles();
+        defaultRoles.add(roles);
+        user.setRoles(defaultRoles);
+        userRepository.save(user);
+    }
+
+    public void removeRole(RolesEntity roles, UsersEntity user) {
+        List<RolesEntity> defaultRoles = user.getRoles();
+        defaultRoles = defaultRoles.stream().filter(x -> !x.getId().equals(roles.getId())).collect(Collectors.toList());
+        //defaultRoles.remove(roles);
+        user.setRoles(defaultRoles);
+        userRepository.save(user);
     }
 }

@@ -11,7 +11,7 @@ function getNews() {
                 let content = result.content;
 
                 content.forEach((item) => {
-                    var contentComment = "";
+                    let contentComment = "";
                     item.comments.forEach((comment)=> {
                         contentComment += '<div class="d-flex px-2 py-1">' +
                                                 '<div>' +
@@ -23,10 +23,12 @@ function getNews() {
                                                 '</div>' +
                                             '</div>'
                     });
+                    let imgNews = '<img src="' + item.urlImg + '" style="width: 100%; max-height: 400px; object-fit: cover; object-position: 50% 50%" alt="news">';
+                    if (item.urlImg === "/files/img/news/null") imgNews = "";
                     $('#contentNews').append(
                         '<div class="card w-80 mb-4">' +
                             '<div class="card-header pb-0">' +
-                                '<img src="' + item.urlImg + '" style="width: 100%; max-height: 400px; object-fit: cover; object-position: 50% 50%" alt="news">' +
+                                imgNews +
                             '</div>' +
                             '<div class="card-body pt-2">' +
                                 '<h4>' + item.title +'</h4>' +
